@@ -18,7 +18,7 @@ namespace MvcKutuphane.Controllers
         public ActionResult Yeni()
         {
             ViewBag.Kategori = new SelectList(db.Kategori.ToList(), "Id", "Ad");
-            ViewBag.Yazar = new SelectList(db.Yazar.ToList(), "Id", "Ad");
+            ViewBag.Yazar = new SelectList(db.Yazar.ToList(), "Id", "FullName");
             return View();
         }
 
@@ -33,7 +33,7 @@ namespace MvcKutuphane.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.Kategori = new SelectList(db.Kategori.ToList(), "Id", "Ad");
-            ViewBag.Yazar = new SelectList(db.Yazar.ToList(), "Id", "Ad"+"Soyad");
+            ViewBag.Yazar = new SelectList(db.Yazar.ToList(), "Id", "FullName");
             return View();
         }
 
@@ -59,7 +59,7 @@ namespace MvcKutuphane.Controllers
                 return HttpNotFound();
             }
             ViewBag.Kategori = new SelectList(db.Kategori.ToList(), "Id", "Ad");
-            ViewBag.Yazar = new SelectList(db.Yazar.ToList(), "Id", "Ad");
+            ViewBag.Yazar = new SelectList(db.Yazar.ToList(), "Id", "FullName");
             return View(yaz);
         }
 
