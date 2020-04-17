@@ -1,0 +1,29 @@
+﻿@model Yazar
+@{
+    ViewBag.Title = "Yeni";
+}
+
+<h2>Yeni Yazar Ekle</h2>
+
+@using (Html.BeginForm("Yeni", "Yazar", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(x => x.Ad)
+        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Ad, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Soyad)
+        @Html.TextBoxFor(x => x.Soyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Soyad, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Detay)
+        @Html.TextAreaFor(x => x.Detay, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Detay, null, new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Ekle</button>
+    <a href="Index" class="btn btn-danger">İptal</a>
+}
+

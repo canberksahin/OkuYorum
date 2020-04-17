@@ -1,0 +1,83 @@
+﻿
+@{
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/fontawesome.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            font-family: "Lato", sans-serif;
+        }
+
+        .sidebar {
+            height: 100%;
+            width: 240px;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 16px;
+        }
+
+            .sidebar a {
+                padding: 6px 8px 6px 16px;
+                text-decoration: none;
+                font-size: 20px;
+                color: #808080;
+                display: block;
+            }
+
+                .sidebar a:hover {
+                    color: #00ff90;
+                }
+
+        .main {
+            margin-left: 240px; /* Same as the width of the sidenav */
+            padding: 0px 10px;
+        }
+
+        @@media screen and (max-height: 450px) {
+            .sidebar {
+                padding-top: 15px;
+            }
+
+                .sidebar a {
+                    font-size: 18px;
+                }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="#"><i class="fa fa-home"></i>&nbsp; Anasayfa</a>
+        <a href="@Url.Action("Index","Kategori")"><i class="fa fa-list"></i>&nbsp; Kategoriler</a>
+        <a href="@Url.Action("Index","Kitap")"><i class="fa fa-book"></i>&nbsp; Kitaplar</a>
+        <a href="@Url.Action("Index","Yazar")"><i class="fa fa-pencil"></i>&nbsp; Yazarlar</a>
+        <a href="#"><i class="fa fa-eye"></i>&nbsp; Üyeler</a>
+        <a href="#"><i class="fa fa-user"></i>&nbsp; Personeller</a>
+        <a href="#"><i class="fa fa-gift"></i>&nbsp; Ödünç Kitap Al</a>
+        <a href="#"><i class="fa fa-arrow-circle-down"></i>&nbsp; Ödünç Kitap Ver</a>
+        <a href="#"><i class="fa fa-money"></i>&nbsp; Kasa</a>
+        <a href="#" class="active"><i class="fa fa-filter"></i>&nbsp; İşlemler</a>
+        <a href="#"><i class="fa fa-wrench"></i>&nbsp; Ayarlar</a>
+        <a href="#"><i class="fa fa-bookmark"></i>&nbsp; Yardım</a>
+        <a href="#"><i class="fa fa-times-circle"></i>&nbsp; Çıkış</a>
+    </div>
+
+    <div class="main">
+        @RenderBody()
+    </div>
+    <script src="~/Scripts/jquery-3.5.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("scripts", false)
+</body>
+</html>

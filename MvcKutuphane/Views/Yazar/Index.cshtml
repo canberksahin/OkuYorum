@@ -1,0 +1,79 @@
+﻿@model List<Yazar>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Yazarlar</h2>
+
+<a href="@Url.Action("Yeni","Yazar")" class="btn btn-primary"><i class="fa fa-plus"></i> Yeni Yazar Ekle</a>
+
+<table class="table table-hover table table-bordered mt-3">
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Ad</td>
+            <td>Soyad</td>
+            <td>Detay</td>
+            <td>İşlemler</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Ad</td>
+            <td>@item.Soyad</td>
+            <td>@item.Detay</td>
+            <td>
+                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#silModal"
+                   data-yazar-id="@item.Id" data-yazar-ad="@item.Ad">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <a href="@Url.Action("Duzenle", new {id =item.Id })" class="btn btn-success"><i class="fa fa-edit"></i></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@using (Html.BeginForm("Sil", "Yazar", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <!-- Modal -->
+    <div class="modal fade" id="silModal" tabindex="1" role="dialog" aria-labelledby="silModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="silModalTitle">Silme Onayı</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    &quot;<span id="silYazarAd">xxx</span>&quot; adlı yazarın silinmesini onaylıyor musunuz?
+
+                    <input type="hidden" id="silYazarId" name="id" value="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Evet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $('#silModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // modalın açılmasını tetikleyen buton
+            var Ad = button.data('yazar-ad'); // tetikleyici buton üzerindeki data-urun-ad attribute'u
+            var Id = button.data('yazar-id'); // tetikleyici buton üzerindeki data-urun-id attribute'u
+            var modal = $(this); // açılan modal'ın kendisi
+            modal.find('#silYazarAd').text(Ad); // modal üzerindeki yazar ad span'ı
+            modal.find('#silYazarId').val(Id); // modal üzerindeki yazar id hidden alanı
+        });
+    </script>
+}
+

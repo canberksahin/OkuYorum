@@ -1,0 +1,20 @@
+﻿@model  Kategori
+@{
+    ViewBag.Title = "Düzenle";
+}
+
+<h2>Kategoriyi Düzenle</h2>
+
+@using (Html.BeginForm("Duzenle", "Kategori", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x=>x.Id)
+    <div class="form-group">
+        @Html.LabelFor(x => x.Ad)
+        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Ad, null, new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Düzenle</button>
+    <a href="@Url.Action("Index","Kategori")" class="btn btn-danger">İptal</a>
+}
+

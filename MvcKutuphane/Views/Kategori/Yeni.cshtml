@@ -1,0 +1,18 @@
+﻿@model Kategori
+@{
+    ViewBag.Title = "Yeni Kategori";
+}
+
+<h2>Yeni Kategori Ekle</h2>
+
+@using (Html.BeginForm("Yeni","Kategori",FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(x=>x.Ad)
+        @Html.TextBoxFor(x=>x.Ad,new {@class ="form-control" })
+        @Html.ValidationMessageFor(x=>x.Ad,null,new {@class ="text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Ekle</button>
+    <a href="Index" class="btn btn-danger">İptal</a>
+}
