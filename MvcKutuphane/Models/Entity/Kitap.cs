@@ -11,8 +11,7 @@ namespace MvcKutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Kitap
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,12 +21,8 @@ namespace MvcKutuphane.Models.Entity
         }
     
         public int Id { get; set; }
-        [Required]
-        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Lütfen sadece harf kullanınız.")]
         public string Ad { get; set; }
-        [Required]
         public Nullable<byte> Kategori { get; set; }
-        [Required]
         public Nullable<int> Yazar { get; set; }
         public string BasımYıl { get; set; }
         public string Yayinevi { get; set; }

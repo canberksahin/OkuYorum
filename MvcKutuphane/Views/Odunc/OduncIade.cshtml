@@ -1,0 +1,44 @@
+﻿@model Hareket
+@{
+    ViewBag.Title = "OduncIade";
+}
+
+<h2>Kitabı İade Et</h2>
+
+@using (Html.BeginForm("OduncIade", "Odunc", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <input type="hidden" name="Durum" value="True" />
+    <div class="form-group">
+        @Html.LabelFor(x => x.Kitap1.Ad)
+        @Html.TextBoxFor(x => x.Kitap1.Ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Kitap1.Ad, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Uyeler.Ad)
+        @Html.TextBoxFor(x => x.Uyeler.Ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Uyeler.Ad, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Personel1.Personel1)
+        @Html.TextBoxFor(x => x.Personel1.Personel1, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Personel1.Personel1, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.AlisTarihi)
+        @Html.TextBoxFor(x => x.AlisTarihi,"{0: dd.MM.yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.AlisTarihi, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.IadeTarihi)
+        @Html.TextBoxFor(x => x.IadeTarihi,"{0: dd.MM.yyyy}", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.IadeTarihi, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        <label>Üyenin Getirdiği Tarih</label>
+        <input type="text" class="form-control" value="@DateTime.Now.ToShortDateString()"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ödünç Kitabı Geri Al</button>
+    <a href="@Url.Action("Index","Odunc")" class="btn btn-danger">İptal</a>
+}

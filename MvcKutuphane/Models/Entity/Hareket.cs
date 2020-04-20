@@ -31,5 +31,6 @@ namespace MvcKutuphane.Models.Entity
         public virtual ICollection<Cezalar> Cezalar { get; set; }
         public virtual Kitap Kitap1 { get; set; }
         public virtual Uyeler Uyeler { get; set; }
+        public virtual Personel Personel1 { get; set; }
     }
 }

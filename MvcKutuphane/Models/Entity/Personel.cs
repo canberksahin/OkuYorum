@@ -14,7 +14,16 @@ namespace MvcKutuphane.Models.Entity
     
     public partial class Personel
     {
-        public byte Id { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Personel()
+        {
+            this.Hareket = new HashSet<Hareket>();
+        }
+    
+        public int Id { get; set; }
         public string Personel1 { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Hareket> Hareket { get; set; }
     }
 }

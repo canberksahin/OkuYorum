@@ -1,0 +1,19 @@
+﻿@model Personel
+@{
+    ViewBag.Title = "Duzenle";
+}
+
+<h2>Personeli Düzenle</h2>
+
+@using (Html.BeginForm("Duzenle", "Personel", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(x => x.Personel1)
+        @Html.TextBoxFor(x => x.Personel1, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Personel1, null, new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Ekle</button>
+    <a href="@Url.Action("Index","Personel")" class="btn btn-danger">İptal</a>
+}

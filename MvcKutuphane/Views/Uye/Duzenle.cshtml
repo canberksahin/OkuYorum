@@ -1,0 +1,52 @@
+﻿@model Uyeler
+@{
+    ViewBag.Title = "Duzenle";
+}
+
+<h2>Üyeyi Düzenle</h2>
+@using (Html.BeginForm("Duzenle", "Uye", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(x => x.Ad)
+        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Ad, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Soyad)
+        @Html.TextBoxFor(x => x.Soyad, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Soyad, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Mail)
+        @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Mail, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.KullaniciAdi)
+        @Html.TextBoxFor(x => x.KullaniciAdi, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.KullaniciAdi, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Sifre)
+        @Html.TextBoxFor(x => x.Sifre, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Sifre, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Telefon)
+        @Html.TextBoxFor(x => x.Telefon, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Telefon, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Okul)
+        @Html.TextBoxFor(x => x.Okul, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Okul, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Fotograf)
+        @Html.TextBoxFor(x => x.Fotograf, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Fotograf, null, new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Ekle</button>
+    <a href="@Url.Action("Index","Uye")" class="btn btn-danger">İptal</a>
+}

@@ -1,31 +1,17 @@
-﻿@model List<Kitap>
+﻿@model List<Personel>
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Kitaplar</h2>
+<h2>Personel Listesi</h2>
 
-@using (Html.BeginForm("Index", "Kitap", FormMethod.Get))
-{
-<div style="margin:15px 0" class="form-group row">
-    @Html.TextBox("p", null, new { @class = "form-control col-9", placeholder = "Kitap Ara" })
-    <input class="btn btn-primary col-1" type="submit" value="Ara" />
-    <a href="@Url.Action("Yeni","Kitap")" class="btn btn-danger col-2"><i class="fa fa-plus"></i> Yeni Kitap Ekle</a>
-</div>
-}
-
-
+<a href="@Url.Action("Yeni","Personel")" class="btn btn-primary"><i class="fa fa-plus"></i> Yeni Personel Ekle</a>
 
 <table class="table table-hover table table-bordered mt-3">
     <thead>
         <tr>
-            <td>Id</td>
-            <td>Kitap Adı</td>
-            <td>Yazar</td>
-            <td>Kategori</td>
-            <td>Basım Yılı</td>
-            <td>Yayın Evi</td>
-            <td>Sayfa</td>
+            <td>Personel Id</td>
+            <td>Personel</td>
             <td>İşlemler</td>
         </tr>
     </thead>
@@ -34,25 +20,20 @@
         {
             <tr>
                 <td>@item.Id</td>
-                <td>@item.Ad</td>
-                <td>@item.Yazar1.Ad @item.Yazar1.Soyad</td>
-                <td>@item.Kategori1.Ad</td>
-                <td>@item.BasımYıl</td>
-                <td>@item.Yayinevi</td>
-                <td>@item.Sayfa</td>
+                <td>@item.Personel1</td>
                 <td>
                     <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#silModal"
-                       data-kitap-id="@item.Id" data-kitap-ad="@item.Ad">
+                       data-kat-id="@item.Id" data-kat-ad="@item.Personel1">
                         <i class="fa fa-trash"></i>
                     </a>
-                    <a href="@Url.Action("Duzenle", new { id = item.Id })" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                    <a href="@Url.Action("Duzenle", new {id =item.Id })" class="btn btn-success"><i class="fa fa-edit"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
 
-@using (Html.BeginForm("Sil", "Kitap", FormMethod.Post))
+@using (Html.BeginForm("Sil", "Personel", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <!-- Modal -->
@@ -66,9 +47,9 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    &quot;<span id="silKitapAd">xxx</span>&quot; adlı kitapın silinmesini onaylıyor musunuz?
+                    &quot;<span id="silKatAd">xxx</span>&quot; adlı personelin silinmesini onaylıyor musunuz?
 
-                    <input type="hidden" id="silKitapId" name="id" value="" />
+                    <input type="hidden" id="silKatId" name="id" value="" />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
@@ -83,12 +64,13 @@
     <script>
         $('#silModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget); // modalın açılmasını tetikleyen buton
-            var Ad = button.data('kitap-ad'); // tetikleyici buton üzerindeki data-urun-ad attribute'u
-            var Id = button.data('kitap-id'); // tetikleyici buton üzerindeki data-urun-id attribute'u
+            var Ad = button.data('kat-ad'); // tetikleyici buton üzerindeki data-urun-ad attribute'u
+            var Id = button.data('kat-id'); // tetikleyici buton üzerindeki data-urun-id attribute'u
             var modal = $(this); // açılan modal'ın kendisi
-            modal.find('#silKitapAd').text(Ad); // modal üzerindeki kitap ad span'ı
-            modal.find('#silKitapId').val(Id); // modal üzerindeki kitap id hidden alanı
+            modal.find('#silKatAd').text(Ad); // modal üzerindeki kat ad span'ı
+            modal.find('#silKatId').val(Id); // modal üzerindeki kat id hidden alanı
         });
     </script>
 }
+
 

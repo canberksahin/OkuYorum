@@ -20,6 +20,7 @@
         <AssociationConnector Association="DbKutuphaneModel.FK_Hareket_Uyeler" ManuallyRouted="false" />
         <AssociationConnector Association="DbKutuphaneModel.FK_Kitap_Kategori" ManuallyRouted="false" />
         <AssociationConnector Association="DbKutuphaneModel.FK_Kitap_Yazar" ManuallyRouted="false" />
+        <AssociationConnector Association="DbKutuphaneModel.FK_Hareket_Personel" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,7 +11,6 @@ namespace MvcKutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class Yazar
@@ -23,23 +22,18 @@ namespace MvcKutuphane.Models.Entity
         }
     
         public int Id { get; set; }
-
-        [Required]
-        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Lütfen sadece harf kullanýnýz.")]
         public string Ad { get; set; }
-
-        [Required]
-        [RegularExpression(@"^[a-zA-Z\s]+$", ErrorMessage = "Lütfen sadece harf kullanýnýz.")]
         public string Soyad { get; set; }
         public string Detay { get; set; }
-
-        [NotMapped]
-        public string FullName { get {
-                return Ad + " " + Soyad;
-            } }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kitap> Kitap { get; set; }
 
+        [NotMapped]
+        public string FullName { 
+            get
+            {
+                return Ad + " " + Soyad;
+            } }
     }
 }

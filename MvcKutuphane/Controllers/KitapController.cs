@@ -10,9 +10,14 @@ namespace MvcKutuphane.Controllers
 {
     public class KitapController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string p)
         {
-            return View(db.Kitap.ToList());
+            var kitaplar = from k in db.Kitap select k;
+            if (!string.IsNullOrEmpty(p))
+            {
+                kitaplar = kitaplar.Where(x => x.Ad.Contains(p));
+            }
+            return View(kitaplar.ToList());
         }
 
         public ActionResult Yeni()

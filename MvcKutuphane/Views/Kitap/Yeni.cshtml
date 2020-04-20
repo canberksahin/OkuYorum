@@ -8,6 +8,7 @@
 @using (Html.BeginForm("Yeni", "Kitap", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    <input type="hidden" name="Durum" value="True" />
     <div class="form-group">
         @Html.LabelFor(x => x.Ad)
         @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
