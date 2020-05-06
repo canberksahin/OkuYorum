@@ -20,7 +20,15 @@ namespace MvcKutuphane.Models.Entity
         {
             this.Kitap = new HashSet<Kitap>();
         }
-    
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return Ad + " " + Soyad;
+            }
+        }
+
         public int Id { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
@@ -28,12 +36,5 @@ namespace MvcKutuphane.Models.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kitap> Kitap { get; set; }
-
-        [NotMapped]
-        public string FullName { 
-            get
-            {
-                return Ad + " " + Soyad;
-            } }
     }
 }

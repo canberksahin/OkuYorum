@@ -9,9 +9,13 @@
 
 namespace MvcKutuphane.Models.Entity
 {
+    using MvcKutuphane.Common;
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web;
+
     public partial class Kitap
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +23,9 @@ namespace MvcKutuphane.Models.Entity
         {
             this.Hareket = new HashSet<Hareket>();
         }
-    
+        [NotMapped, Display(Name = "Kitap Kapak Foto"), UrunResmi]
+        public HttpPostedFileBase Foto { get; set; }
+
         public int Id { get; set; }
         public string Ad { get; set; }
         public Nullable<byte> Kategori { get; set; }
@@ -28,6 +34,7 @@ namespace MvcKutuphane.Models.Entity
         public string Yayinevi { get; set; }
         public string Sayfa { get; set; }
         public Nullable<bool> Durum { get; set; }
+        public string KitapKapak { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hareket> Hareket { get; set; }

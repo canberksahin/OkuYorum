@@ -8,6 +8,7 @@
 @using (Html.BeginForm("OduncVer", "Odunc", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.Hidden("IslemDurum",false)
     <div class="form-group">
         <label>Üye ID</label>
         @Html.TextBoxFor(x => x.Uye, new { @class = "form-control" })

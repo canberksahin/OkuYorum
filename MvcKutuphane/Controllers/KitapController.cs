@@ -1,4 +1,5 @@
-﻿using MvcKutuphane.Models.Entity;
+﻿using MvcKutuphane.Common;
+using MvcKutuphane.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +14,7 @@ namespace MvcKutuphane.Controllers
         public ActionResult Index(string p)
         {
             var kitaplar = from k in db.Kitap select k;
+            kitaplar = kitaplar.Where(x => x.Durum == true);
             if (!string.IsNullOrEmpty(p))
             {
                 kitaplar = kitaplar.Where(x => x.Ad.Contains(p));
@@ -33,6 +35,7 @@ namespace MvcKutuphane.Controllers
         {
             if (ModelState.IsValid)
             {
+                kit.KitapKapak = this.UrunResimKaydet(kit.Foto);
                 db.Kitap.Add(kit);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -71,13 +74,45 @@ namespace MvcKutuphane.Controllers
         [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Duzenle(Kitap yaz)
         {
+            var dbKitap = db.Kitap.Find(yaz.Id);
             if (ModelState.IsValid)
             {
-                db.Entry(yaz).State = EntityState.Modified;
+                #region Kitap Foto Güncelle
+                if (yaz.Foto != null)
+                {
+                    this.UrunResimSil(dbKitap.KitapKapak); // eskiyi sil
+                    dbKitap.KitapKapak = this.UrunResimKaydet(yaz.Foto); // yeniyi kaydet
+                }
+                #endregion
+                dbKitap.Ad = yaz.Ad;
+                dbKitap.BasımYıl = yaz.BasımYıl;
+                dbKitap.Kategori = yaz.Kategori;
+                dbKitap.Sayfa = yaz.Sayfa;
+                dbKitap.Yazar = yaz.Yazar;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View();
+            ViewBag.Kategori = new SelectList(db.Kategori.ToList(), "Id", "Ad");
+            ViewBag.Yazar = new SelectList(db.Yazar.ToList(), "Id", "FullName");
+            return View(yaz);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult UrunResimSil(int id)
+        {
+            var urun = db.Kitap.Find(id);
+
+            if (urun == null)
+            {
+                return HttpNotFound();
+            }
+
+            this.UrunResimSil(urun.KitapKapak);
+
+            urun.KitapKapak = "";
+            db.SaveChanges();
+
+            return RedirectToAction("Duzenle", new { id = id });
         }
     }
 }

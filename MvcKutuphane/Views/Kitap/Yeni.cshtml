@@ -5,7 +5,7 @@
 
 <h2>Yeni Kitap Ekle</h2>
 
-@using (Html.BeginForm("Yeni", "Kitap", FormMethod.Post))
+@using (Html.BeginForm("Yeni", "Kitap", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     <input type="hidden" name="Durum" value="True" />
@@ -39,7 +39,37 @@
         @Html.TextBoxFor(x => x.Sayfa, new { @class = "form-control" })
         @Html.ValidationMessageFor(x => x.Sayfa, null, new { @class = "text-danger" })
     </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Foto)
+        <div id="onizlemeResim" class="d-none">
+            <img src="" alt="Yüklenecek Resim Önizleme" height="75" />
+        </div>
+        @Html.TextBoxFor(x => x.Foto, new { type = "file", @class = "form-control-file", accept = "image/png, image/jpeg" })
+        @Html.ValidationMessageFor(x => x.Foto, null, new { @class = "text-danger" })
+    </div>
 
     <button type="submit" class="btn btn-primary">Ekle</button>
     <a href="@Url.Action("Index","Kitap")" class="btn btn-danger">İptal</a>
+}
+@section scripts {
+    <script>
+        $("#Foto").change(function (event) {
+            // eğer dosya seçildiyse
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+
+                // dosya okuma işlemi bittiğinde
+                reader.onload = function (e) {
+                    $("#onizlemeResim img").attr("src", e.target.result);
+                    $("#onizlemeResim").removeClass("d-none");
+                };
+
+                // dosyayı oku
+                reader.readAsDataURL(this.files[0]);
+            }
+            else {
+                $("#onizlemeResim").addClass("d-none");
+            }
+        });
+    </script>
 }

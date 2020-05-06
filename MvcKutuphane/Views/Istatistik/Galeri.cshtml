@@ -1,0 +1,83 @@
+﻿@model List<Kitap>
+@{
+    ViewBag.Title = "Galeri";
+}
+
+<h2 class="text-center">Galeri</h2>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Galeri</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div class="container" style="width:100%;">
+        <div id="myCarousel" class="carousel slide " data-ride="carousel" style="height:100%;">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+                    if (i == 0)
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@i" class="active"></li>
+                    }
+                    else
+                    {
+                        <li data-target="#myCarousel" data-slide-to="@i" class=""></li>
+                    }
+
+                }
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner text-center">
+
+                @for (int i = 0; i < Model.Count(); i++)
+                {
+
+                    if (i == 0)
+                    {
+                        <div class="item active">
+                            <img src="@Url.UrunResim(@Model[i].KitapKapak)" alt="" style="height:100%; text-align:center; margin-left:200px;">
+                            <div class="carousel-caption">
+                                <h3>@Model[i].Ad</h3>
+                                <p>@Model[i].Yazar1.FullName</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="item ">
+                            <img src="@Url.UrunResim(@Model[i].KitapKapak)" alt="" style="height:100%; text-align:center; margin-left:200px;" >
+                            <div class="carousel-caption">
+                                <h3>@Model[i].Ad</h3>
+                                <p>@Model[i].Yazar1.FullName</p>
+                            </div>
+                        </div>
+
+                    }
+                }
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+                <span class="sr-only">Önceki</span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+                <span class="sr-only">Sıradaki</span>
+            </a>
+        </div>
+    </div>
+
+</body>
+</html>
+

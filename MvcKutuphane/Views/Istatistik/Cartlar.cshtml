@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Cartlar";
+}
+
+<div class="container-fluid mt-2">
+    <div class="row">
+        @Cartlar("bg-info",(ViewBag.dgr1).ToString(), "Kitap Sayımız", "fa fa-book")
+        @Cartlar("bg-success", (ViewBag.dgr2).ToString(), "Üye Sayımız", "fa fa-user")
+        @Cartlar("bg-danger", (ViewBag.dgr3).ToString(), "Kasa Tutar", "fa fa-money")
+        @Cartlar("bg-warning", (ViewBag.dgr4).ToString(), "Ödünçteki Kitaplar", "fas fa-book-open")
+        @Cartlar("bg-info", (ViewBag.dgr5).ToString(), "Kategori Sayısı", "fa fa-list")
+        @Cartlar("bg-success", (ViewBag.dgr6).ToString(), "En Aktif Üye", "fas fa-user-friends")
+        @Cartlar("bg-danger", (ViewBag.dgr7).ToString(), "En Çok Okunan Kitap", "fa fa-arrow-up")
+        @Cartlar("bg-warning", (ViewBag.dgr8).ToString(), "En Fazla Kitabı Olan Yazar", "fas fa-pen")
+        @Cartlar("bg-info", (ViewBag.dgr9).ToString(), "En İyi Yayınevi", "fa fa-house-user")
+        @Cartlar("bg-success", (ViewBag.dgr10).ToString(), "En Başarılı Personel", "fas fa-glasses")
+        @Cartlar("bg-danger", (ViewBag.dgr11).ToString(), "Toplam Mesaj Sayısı", "fa fa-plus")
+        @Cartlar("bg-warning", (ViewBag.dgr12).ToString(), "Bugünki Emanetler", "fa fa-arrow-circle-o-right")
+    </div>
+</div>
+
+@helper Cartlar(string renk, string sayi, string aciklama, string icon)
+{
+    <div class="col-lg-3 col-6">
+        <!-- small box -->
+        <div class="small-box @renk">
+            <div class="inner">
+                <h3>@sayi</h3>
+                <p>@aciklama</p>
+            </div>
+            <div class="icon">
+                <i class="@icon"></i>
+            </div>
+        </div>
+    </div>
+}

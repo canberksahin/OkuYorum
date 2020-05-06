@@ -3,7 +3,8 @@
     Layout = null;
 }
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-<link href="~/Content/fontawesome.css" rel="stylesheet" />
+<link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
+<link href="~/Content/adminlte.min.css" rel="stylesheet" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,10 +64,15 @@
         <a href="@Url.Action("Index","Yazar")"><i class="fa fa-pencil"></i>&nbsp; Yazarlar</a>
         <a href="@Url.Action("Index","Uye")"><i class="fa fa-eye"></i>&nbsp; Üyeler</a>
         <a href="@Url.Action("Index","Personel")"><i class="fa fa-user"></i>&nbsp; Personeller</a>
-        <a href="@Url.Action("Index","Odunc")"><i class="fa fa-gift"></i>&nbsp; Ödünç Kitap Al</a>
-        <a href="@Url.Action("OduncVer","Odunc")"><i class="fa fa-arrow-circle-down"></i>&nbsp; Ödünç Kitap Ver</a>
+        <a href="@Url.Action("Index","Odunc")"><i class="fa fa-gift"></i>&nbsp; Kitap İade</a>
+        <a href="@Url.Action("OduncVer","Odunc")"><i class="fa fa-arrow-circle-down"></i>&nbsp; Ödünç Kitap Al</a>
         <a href="@Url.Action("Index","Kasa")"><i class="fa fa-money"></i>&nbsp; Kasa</a>
-        <a href="@Url.Action("Index","Islemler")" class="active"><i class="fa fa-filter"></i>&nbsp; İşlemler</a>
+        <a href="@Url.Action("Index","Istatistik")"><i class="fa fa-chart-bar"></i>&nbsp; İstatistikler</a>
+        <a href="@Url.Action("Index","Islem")" class="active"><i class="fa fa-filter"></i>&nbsp; İşlemler</a>
+        <a href="@Url.Action("HavaKart","Istatistik")" class="active"><i class="fa fa-sun"></i>&nbsp; Hava Raporu</a>
+        <a href="@Url.Action("Galeri","Istatistik")" class="active"><i class="fa fa-image"></i>&nbsp; Galeri</a>
+        <a href="@Url.Action("Cartlar","Istatistik")" class="active"><i class="fa fa-calculator"></i>&nbsp; En'ler</a>
+        <a href="@Url.Action("Index","Vitrin")" class="active"><i class="fa fa-gift"></i>&nbsp; Vitrin</a>
         <a href="@Url.Action("Index","Ayarlar")"><i class="fa fa-wrench"></i>&nbsp; Ayarlar</a>
         <a href="@Url.Action("Index","Yardım")"><i class="fa fa-bookmark"></i>&nbsp; Yardım</a>
         <a href="@Url.Action("Index","Cıkıs")"><i class="fa fa-times-circle"></i>&nbsp; Çıkış</a>

@@ -12,6 +12,8 @@ namespace MvcKutuphane.Models.Entity
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class DbKutuphaneEntities : DbContext
     {
@@ -34,5 +36,36 @@ namespace MvcKutuphane.Models.Entity
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Uyeler> Uyeler { get; set; }
         public virtual DbSet<Yazar> Yazar { get; set; }
+        public virtual DbSet<Hakkimizda> Hakkimizda { get; set; }
+    
+        public virtual ObjectResult<string> EnFazlaKitapYazar()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("EnFazlaKitapYazar");
+        }
+    
+        public virtual ObjectResult<Nullable<int>> AlinanKitapSayisi()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("AlinanKitapSayisi");
+        }
+    
+        public virtual ObjectResult<string> EnAktifKitap()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("EnAktifKitap");
+        }
+    
+        public virtual ObjectResult<string> EnAktifUye()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("EnAktifUye");
+        }
+    
+        public virtual ObjectResult<string> EnIyiPersonel()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("EnIyiPersonel");
+        }
+    
+        public virtual ObjectResult<string> EnIyiYayinEvi()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("EnIyiYayinEvi");
+        }
     }
 }

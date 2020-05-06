@@ -16,8 +16,8 @@
 
 
 
-<table class="table table-hover table table-bordered mt-3">
-    <thead>
+<table class="table table-hover table table-striped mt-3">
+    <thead  style="font-weight:bold">
         <tr>
             <td>Id</td>
             <td>Kitap Adı</td>
@@ -26,28 +26,32 @@
             <td>Basım Yılı</td>
             <td>Yayın Evi</td>
             <td>Sayfa</td>
+            <td>Ürün Görseli</td>
             <td>İşlemler</td>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Ad</td>
-                <td>@item.Yazar1.Ad @item.Yazar1.Soyad</td>
-                <td>@item.Kategori1.Ad</td>
-                <td>@item.BasımYıl</td>
-                <td>@item.Yayinevi</td>
-                <td>@item.Sayfa</td>
-                <td>
-                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#silModal"
-                       data-kitap-id="@item.Id" data-kitap-ad="@item.Ad">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <a href="@Url.Action("Duzenle", new { id = item.Id })" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                </td>
-            </tr>
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Ad</td>
+            <td>@item.Yazar1.Ad @item.Yazar1.Soyad</td>
+            <td>@item.Kategori1.Ad</td>
+            <td>@item.BasımYıl</td>
+            <td>@item.Yayinevi</td>
+            <td>@item.Sayfa</td>
+            <td class="text-center">
+                <img src="@Url.UrunResim(item.KitapKapak)" height="100" />
+            </td>
+            <td>
+                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#silModal"
+                   data-kitap-id="@item.Id" data-kitap-ad="@item.Ad">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <a href="@Url.Action("Duzenle", new { id = item.Id })" class="btn btn-success"><i class="fa fa-edit"></i></a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

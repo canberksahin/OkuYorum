@@ -16,6 +16,13 @@
           <Property Name="Para" Type="decimal" Precision="18" Scale="2" />
           <Property Name="Hareket" Type="int" />
         </EntityType>
+        <EntityType Name="Hakkimizda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Aciklama" Type="varchar(max)" />
+        </EntityType>
         <EntityType Name="Hareket">
           <Key>
             <PropertyRef Name="Id" />
@@ -26,6 +33,8 @@
           <Property Name="Personel" Type="int" />
           <Property Name="AlisTarihi" Type="smalldatetime" />
           <Property Name="IadeTarihi" Type="smalldatetime" />
+          <Property Name="IslemDurum" Type="bit" />
+          <Property Name="UyeGetirTarih" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="Kasa">
           <Key>
@@ -54,6 +63,7 @@
           <Property Name="Yayinevi" Type="varchar" MaxLength="50" />
           <Property Name="Sayfa" Type="varchar" MaxLength="4" />
           <Property Name="Durum" Type="bit" />
+          <Property Name="KitapKapak" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -179,8 +189,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="AlinanKitapSayisi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EnAktifKitap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EnAktifUye" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EnFazlaKitapYazar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EnIyiPersonel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="EnIyiYayinEvi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DbKutuphaneModelStoreContainer">
           <EntitySet Name="Cezalar" EntityType="Self.Cezalar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hakkimizda" EntityType="Self.Hakkimizda" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hareket" EntityType="Self.Hareket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kasa" EntityType="Self.Kasa" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
@@ -249,6 +266,8 @@
           <NavigationProperty Name="Kitap1" Relationship="Self.FK_Hareket_Kitap" FromRole="Hareket" ToRole="Kitap" />
           <NavigationProperty Name="Uyeler" Relationship="Self.FK_Hareket_Uyeler" FromRole="Hareket" ToRole="Uyeler" />
           <NavigationProperty Name="Personel1" Relationship="DbKutuphaneModel.FK_Hareket_Personel" FromRole="Hareket" ToRole="Personel" />
+          <Property Name="IslemDurum" Type="Boolean" />
+          <Property Name="UyeGetirTarih" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Kasa">
           <Key>
@@ -281,6 +300,7 @@
           <NavigationProperty Name="Hareket" Relationship="Self.FK_Hareket_Kitap" FromRole="Kitap" ToRole="Hareket" />
           <NavigationProperty Name="Kategori1" Relationship="Self.FK_Kitap_Kategori" FromRole="Kitap" ToRole="Kategori" />
           <NavigationProperty Name="Yazar1" Relationship="Self.FK_Kitap_Yazar" FromRole="Kitap" ToRole="Yazar" />
+          <Property Name="KitapKapak" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -436,6 +456,13 @@
             <End Role="Personel" EntitySet="Personel" />
             <End Role="Hareket" EntitySet="Hareket" />
           </AssociationSet>
+          <EntitySet Name="Hakkimizda" EntityType="DbKutuphaneModel.Hakkimizda" />
+          <FunctionImport Name="EnFazlaKitapYazar" ReturnType="Collection(String)" />
+          <FunctionImport Name="AlinanKitapSayisi" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="EnAktifKitap" ReturnType="Collection(String)" />
+          <FunctionImport Name="EnAktifUye" ReturnType="Collection(String)" />
+          <FunctionImport Name="EnIyiPersonel" ReturnType="Collection(String)" />
+          <FunctionImport Name="EnIyiYayinEvi" ReturnType="Collection(String)" />
         </EntityContainer>
         <Association Name="FK_Hareket_Personel">
           <End Type="DbKutuphaneModel.Personel" Role="Personel" Multiplicity="0..1" />
@@ -449,6 +476,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Hakkimizda">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -470,6 +504,8 @@
           <EntitySetMapping Name="Hareket">
             <EntityTypeMapping TypeName="DbKutuphaneModel.Hareket">
               <MappingFragment StoreEntitySet="Hareket">
+                <ScalarProperty Name="UyeGetirTarih" ColumnName="UyeGetirTarih" />
+                <ScalarProperty Name="IslemDurum" ColumnName="IslemDurum" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Kitap" ColumnName="Kitap" />
                 <ScalarProperty Name="Uye" ColumnName="Uye" />
@@ -499,6 +535,7 @@
           <EntitySetMapping Name="Kitap">
             <EntityTypeMapping TypeName="DbKutuphaneModel.Kitap">
               <MappingFragment StoreEntitySet="Kitap">
+                <ScalarProperty Name="KitapKapak" ColumnName="KitapKapak" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
                 <ScalarProperty Name="Kategori" ColumnName="Kategori" />
@@ -554,6 +591,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Hakkimizda">
+            <EntityTypeMapping TypeName="DbKutuphaneModel.Hakkimizda">
+              <MappingFragment StoreEntitySet="Hakkimizda">
+                <ScalarProperty Name="Aciklama" ColumnName="Aciklama" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="EnFazlaKitapYazar" FunctionName="DbKutuphaneModel.Store.EnFazlaKitapYazar" />
+          <FunctionImportMapping FunctionImportName="AlinanKitapSayisi" FunctionName="DbKutuphaneModel.Store.AlinanKitapSayisi" />
+          <FunctionImportMapping FunctionImportName="EnAktifKitap" FunctionName="DbKutuphaneModel.Store.EnAktifKitap" />
+          <FunctionImportMapping FunctionImportName="EnAktifUye" FunctionName="DbKutuphaneModel.Store.EnAktifUye" />
+          <FunctionImportMapping FunctionImportName="EnIyiPersonel" FunctionName="DbKutuphaneModel.Store.EnIyiPersonel" />
+          <FunctionImportMapping FunctionImportName="EnIyiYayinEvi" FunctionName="DbKutuphaneModel.Store.EnIyiYayinEvi" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

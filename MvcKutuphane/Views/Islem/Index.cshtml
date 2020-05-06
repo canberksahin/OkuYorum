@@ -1,0 +1,30 @@
+﻿@model List<Hareket>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Geçmiş İşlemler</h2>
+
+<table class="table table-hover table table-striped mt-3">
+    <thead  style="font-weight:bold">
+        <tr>
+            <td>Kitap Adı</td>
+            <td>Üye</td>
+            <td>Personel</td>
+            <td>Alış Tarihi</td>
+            <td>İade Tarihi</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Kitap1.Ad</td>
+                <td>@item.Uyeler.Ad @item.Uyeler.Soyad</td>
+                <td>@item.Personel1.Personel1</td>
+                <td>@Convert.ToDateTime(item.AlisTarihi).ToString("dd/MM/yyyy")</td>
+                <td>@Convert.ToDateTime(item.UyeGetirTarih).ToString("dd/MM/yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
