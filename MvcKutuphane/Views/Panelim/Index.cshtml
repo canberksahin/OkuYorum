@@ -1,8 +1,76 @@
-﻿
+﻿@model Uyeler
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Index</h2>
+<h2 class="my-4">Kütüphane Üye Profil Bilgileri <a class="float-right btn btn-primary " href="@Url.Action("ProfilGuncelle")">Profil Bilgilerini Güncelle</a></h2>
 
+<table class="table table-stripped table-hover">
+    <tbody>
+        <tr class="row">
+            <td class="col-3 border-right">
+                <label>Öğrenci Id</label>
+            </td>
+            <td class="col-9">
+                @Html.DisplayFor(x => x.Id)
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-3 border-right">
+                <label>Mail Adresi</label>
+            </td>
+            <td class="col-9">
+                @Html.DisplayFor(x => x.Mail)
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-3 border-right">
+                <label>Ad</label>
+            </td>
+            <td class="col-9">
+                @Html.DisplayFor(x => x.Ad)
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-3 border-right">
+                <label>Soyad</label>
+            </td>
+            <td class="col-9">
+                @Html.DisplayFor(x => x.Soyad)
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-3 border-right">
+                <label>Kullanıcı Adı</label>
+            </td>
+            <td class="col-9">
+                @Html.DisplayFor(x => x.KullaniciAdi)
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-3 border-right">
+                <label>Şifre</label>
+            </td>
+            <td class="col-9">
+                @Html.DisplayFor(x => x.Sifre)
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-3 border-right border-bottom">
+                <label>Okul</label>
+            </td>
+            <td class="col-9 border-bottom">
+                @Html.DisplayFor(x => x.Okul)
+            </td>
+        </tr>
+        <tr class="row">
+            <td class="col-3 border-right border-bottom">
+                <label>Fotoğraf</label>
+            </td>
+            <td class="col-9 border-bottom">
+                @Html.DisplayFor(x => x.Fotograf)
+            </td>
+        </tr>
+    </tbody>
+</table>

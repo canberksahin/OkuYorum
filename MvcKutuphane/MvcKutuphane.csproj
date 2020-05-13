@@ -638,6 +638,7 @@
     <Content Include="panel\vendor\jquery\jquery.min.map" />
     <Content Include="panel\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Views\Panelim\Index.cshtml" />
+    <Content Include="Views\Panelim\ProfilGuncelle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

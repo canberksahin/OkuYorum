@@ -1,0 +1,64 @@
+﻿@model Uyeler
+@{
+    ViewBag.Title = "ProfilGuncelle";
+    Layout = "~/Views/Shared/_LayoutPanel.cshtml";
+}
+    <h2 class="my-4">Profil Bilgilerini Güncelle</h2>
+@using (Html.BeginForm("ProfilGuncelle", "Panelim", FormMethod.Post))
+{
+    <table class="table table-stripped table-hover">
+        <tbody>
+            <tr class="row">
+                <td class="col-3 border-right">
+                    <label>Ad</label>
+                </td>
+                <td class="col-9">
+                    @Html.TextBoxFor(x => x.Ad)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-3 border-right">
+                    <label>Soyad</label>
+                </td>
+                <td class="col-9">
+                    @Html.TextBoxFor(x => x.Soyad)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-3 border-right">
+                    <label>Kullanıcı Adı</label>
+                </td>
+                <td class="col-9">
+                    @Html.TextBoxFor(x => x.KullaniciAdi)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-3 border-right">
+                    <label>Şifre</label>
+                </td>
+                <td class="col-9">
+                    @Html.TextBoxFor(x => x.Sifre)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-3 border-right border-bottom">
+                    <label>Okul</label>
+                </td>
+                <td class="col-9 border-bottom">
+                    @Html.TextBoxFor(x => x.Okul)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-3 border-right border-bottom">
+                    <label>Fotoğraf</label>
+                </td>
+                <td class="col-9 border-bottom">
+                    @Html.TextBoxFor(x => x.Fotograf)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+    <a href="@Url.Action("Index")" class="btn btn-danger">İptal</a>
+}
+
