@@ -30,7 +30,7 @@ namespace MvcKutuphane.Controllers
             {
                 db.Kategori.Add(kat);
                 db.SaveChanges();
-
+                TempData["SuccessMessage"] = "Yeni kategori başarıyla oluşturulmuştur.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -44,8 +44,14 @@ namespace MvcKutuphane.Controllers
             {
                 return HttpNotFound();
             }
+            if (kat.Kitap.Count > 0)
+            {
+                TempData["ErrorMessage"] = "Bu kategorinin altında yüklü kitaplar olduğu için silinemez.";
+                return RedirectToAction("Index");
+            }
             db.Kategori.Remove(kat);
             db.SaveChanges();
+            TempData["SuccessMessage"] = "Kategori başarıyla silinmiştir.";
             return RedirectToAction("Index");
         }
 
@@ -66,9 +72,20 @@ namespace MvcKutuphane.Controllers
             {
                 db.Entry(kat).State = EntityState.Modified;
                 db.SaveChanges();
+                TempData["SuccessMessage"] = "Kategori başarıyla düzenlenmiştir.";
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult DurumDegistir(int id, bool isPublished)
+        {
+            var comment = db.Kategori.Find(id);
+
+            comment.Durum = isPublished ? true : false;
+            db.SaveChanges();
+            return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
         }
     }
 }

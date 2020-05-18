@@ -19,6 +19,7 @@ namespace MvcKutuphane.Controllers
             {
                 kitaplar = kitaplar.Where(x => x.Ad.Contains(p));
             }
+            kitaplar = kitaplar.Where(x => x.Kategori1.Durum == true);
             return View(kitaplar.ToList());
         }
 
@@ -38,6 +39,7 @@ namespace MvcKutuphane.Controllers
                 kit.KitapKapak = this.UrunResimKaydet(kit.Foto);
                 db.Kitap.Add(kit);
                 db.SaveChanges();
+                TempData["SuccessMessage"] = "Yeni kitap başarıyla eklenmiştir.";
                 return RedirectToAction("Index");
             }
             ViewBag.Kategori = new SelectList(db.Kategori.ToList(), "Id", "Ad");
@@ -56,6 +58,7 @@ namespace MvcKutuphane.Controllers
             }
             db.Kitap.Remove(kat);
             db.SaveChanges();
+            TempData["SuccessMessage"] = "Kitap başarıyla silinmiştir.";
             return RedirectToAction("Index");
         }
 
@@ -90,6 +93,7 @@ namespace MvcKutuphane.Controllers
                 dbKitap.Sayfa = yaz.Sayfa;
                 dbKitap.Yazar = yaz.Yazar;
                 db.SaveChanges();
+                TempData["SuccessMessage"] = "Kitap başarıyla düzenlenmiştir.";
                 return RedirectToAction("Index");
             }
             ViewBag.Kategori = new SelectList(db.Kategori.ToList(), "Id", "Ad");

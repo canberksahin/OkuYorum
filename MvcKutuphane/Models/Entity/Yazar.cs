@@ -11,7 +11,8 @@ namespace MvcKutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Yazar
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,16 @@ namespace MvcKutuphane.Models.Entity
         {
             this.Kitap = new HashSet<Kitap>();
         }
-    
+
+        [NotMapped]
+        public string FullName
+        {
+            get
+            {
+                return Ad + " " + Soyad;
+            }
+        }
+
         public int Id { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }

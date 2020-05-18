@@ -38,5 +38,11 @@ namespace MvcKutuphane.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public ActionResult Kitaplarım()
+        {
+            var uyeMail = (string)Session["Mail"];
+            return View(db.Hareket.Where(x => x.Uyeler.Mail == uyeMail).OrderByDescending(x => x.Id).ToList());
+        }
     }
 }

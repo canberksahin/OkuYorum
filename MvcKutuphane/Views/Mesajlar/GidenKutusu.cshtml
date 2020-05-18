@@ -1,15 +1,15 @@
 ﻿@model List<Mesajlar>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "GidenKutusu";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>Gelen Mesajlar</h2>
+<h2>Giden Kutusu</h2>
 
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Gönderen</th>
+            <th>Alıcı</th>
             <th>Konu</th>
             <th>Mesaj</th>
             <th>İşlemler</th>
@@ -19,11 +19,10 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.Gonderen</td>
+                <td>@item.Alici</td>
                 <td>@item.Konu</td>
                 <td>@item.Icerik</td>
             </tr>
         }
     </tbody>
 </table>
-

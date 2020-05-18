@@ -5,6 +5,7 @@
 <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
 <link href="~/Content/adminlte.min.css" rel="stylesheet" />
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,9 +82,25 @@
     <div class="main">
         @RenderBody()
     </div>
-    <script src="~/Scripts/jquery-3.5.0.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/bootstrap-switch.min.js"></script>
+    <script src="~/Scripts/toastr.min.js"></script>
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+             <text>
+                toastr.success('@(TempData["SuccessMessage"])');
+             </text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+             <text>
+                 toastr.error('@(TempData["ErrorMessage"])');
+             </text>
+        }
+    </script>
     @RenderSection("scripts", false)
 </body>
 </html>

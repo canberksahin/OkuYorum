@@ -12,23 +12,27 @@
         <tr>
             <td>Kategori Id</td>
             <td>Kategori Ad</td>
+            <td>Yayında mı?</td>
             <td>İşlemler</td>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@item.Id</td>
-                <td>@item.Ad</td>
-                <td>
-                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#silModal"
-                       data-kat-id="@item.Id" data-kat-ad="@item.Ad">
-                        <i class="fa fa-trash"></i>
-                    </a>
-                    <a href="@Url.Action("Duzenle", new {id =item.Id })" class="btn btn-success"><i class="fa fa-edit"></i></a>
-                </td>
-            </tr>
+        <tr>
+            <td>@item.Id</td>
+            <td>@item.Ad</td>
+            <td>
+                @Html.CheckBox("IsPublished", item.Durum == true, new {  @class="btn", data_bootstrap_switch = "", data_off_color = "danger", data_on_color = "success", data_off_text = "Hayır", data_on_text = "Evet", data_comment_id = item.Id })
+            </td>
+            <td>
+                <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#silModal"
+                   data-kat-id="@item.Id" data-kat-ad="@item.Ad">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <a href="@Url.Action("Duzenle", new {id =item.Id })" class="btn btn-success"><i class="fa fa-edit"></i></a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
@@ -70,5 +74,28 @@
             modal.find('#silKatAd').text(Ad); // modal üzerindeki kat ad span'ı
             modal.find('#silKatId').val(Id); // modal üzerindeki kat id hidden alanı
         });
+
+        $("input[data-bootstrap-switch]").each(function () {
+
+            var state = $(this).prop('checked');
+            var checkBox = this;
+
+            $(this).bootstrapSwitch({
+                state: state,
+                onSwitchChange: function (event,state) {
+                    var isPublished = state;
+                    var commentId = $(this).data("comment-id");
+
+                    $.post("@Url.Action("DurumDegistir")", { id: commentId, isPublished: isPublished }, function (data) {
+
+                    }).fail(function (xhr, status, error) {
+                        checkBox.bootstrapSwitch("state", !state, true);
+
+                    });
+
+                }
+            });
+        });
+
     </script>
 }

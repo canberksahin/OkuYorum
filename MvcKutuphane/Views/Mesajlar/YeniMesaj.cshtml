@@ -1,8 +1,30 @@
-﻿
+﻿@model Mesajlar
 @{
     ViewBag.Title = "YeniMesaj";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2>YeniMesaj</h2>
+<h2 class="ml-2">Yeni Mesaj</h2>
+
+@using (Html.BeginForm("YeniMesaj", "Mesajlar", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group col-6 ">
+        @Html.LabelFor(x => x.Alici)
+        @Html.TextBoxFor(x => x.Alici, new { @class = "form-control" })
+    </div>
+    <div class="form-group col-6 ">
+        @Html.LabelFor(x => x.Konu)
+        @Html.TextBoxFor(x => x.Konu, new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.Konu, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group col-6">
+        @Html.LabelFor(x => x.Icerik)
+        @Html.TextAreaFor(x => x.Icerik, new { @class = "form-control", style = "height:200px;" })
+        @Html.ValidationMessageFor(x => x.Icerik, null, new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary ml-3 ">Gönder</button>
+    <a href="@Url.Action("Index","Personel")" class="btn btn-danger">İptal</a>
+}
 

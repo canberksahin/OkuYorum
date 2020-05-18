@@ -27,11 +27,12 @@
             <div class="sidebar-heading">@Session["Mail"]</div>
             <div class="list-group list-group-flush">
                 <a href="@Url.Action("Index","Panelim")" class="list-group-item list-group-item-action bg-light">Profilim</a>
-                <a href="@Url.Action("Index","Mesajlar")" class="list-group-item list-group-item-action bg-light">Mesajlar</a>
+                <a href="@Url.Action("Index","Mesajlar")" class="list-group-item list-group-item-action bg-light">Gelen Kutusu</a>
+                <a href="@Url.Action("GidenKutusu","Mesajlar")" class="list-group-item list-group-item-action bg-light">Giden Kutusu</a>
                 <a href="@Url.Action("YeniMesaj","Mesajlar")" class="list-group-item list-group-item-action bg-light">Yeni Mesaj</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Duyurular</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Kitaplarım</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Vitrin</a>
+                <a href="@Url.Action("Kitaplarım","Panelim")" class="list-group-item list-group-item-action bg-light">Kitaplarım</a>
+                <a href="@Url.Action("Index","Vitrin")" class="list-group-item list-group-item-action bg-light">Vitrin</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Yardım</a>
             </div>
         </div>
@@ -49,7 +50,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Hakkımızda <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="@Url.Action("Index","Vitrin")#about">Hakkımızda <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -66,7 +67,7 @@
             </nav>
 
             <div class="container-fluid">
-               @RenderBody()
+                @RenderBody()
             </div>
         </div>
         <!-- /#page-content-wrapper -->
@@ -74,14 +75,17 @@
     </div>
     <!-- /#wrapper -->
     <!-- Bootstrap core JavaScript -->
-    <script src="~/panel/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/panel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="~/Scripts/bootstrap-switch.min.js"></script>
     <!-- Menu Toggle Script -->
-    <script>$("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-    });</script>
+    <script>
+        $("#menu-toggle").click(function (e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("toggled");
+
+        });
+    </script>
 
 </body>
 
