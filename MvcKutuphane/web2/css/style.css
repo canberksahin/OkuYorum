@@ -48,7 +48,7 @@ label{
 }
 .content {
 	padding:0;
-	width: 76%;
+	/*width: 76%;*/
 }
 .total-content {
 	margin:2em 1em;
@@ -1333,7 +1333,7 @@ button#focus-single,button#focus-multiple,button#focus-coords,button#focus-init 
 		margin-right: 2%;
 	}
 	.content {
-		width: 76%;
+		/*width: 76%;*/
 	}
 	.navigation ul li a {
 		font-size: 1.2em;

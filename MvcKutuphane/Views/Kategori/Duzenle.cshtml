@@ -2,9 +2,6 @@
 @{
     ViewBag.Title = "Düzenle";
 }
-
-<h2>Kategoriyi Düzenle</h2>
-
 @using (Html.BeginForm("Duzenle", "Kategori", FormMethod.Post))
 {
     @Html.AntiForgeryToken()

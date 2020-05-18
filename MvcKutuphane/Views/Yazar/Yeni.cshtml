@@ -2,9 +2,6 @@
 @{
     ViewBag.Title = "Yeni";
 }
-
-<h2>Yeni Yazar Ekle</h2>
-
 @using (Html.BeginForm("Yeni", "Yazar", FormMethod.Post))
 {
     @Html.AntiForgeryToken()

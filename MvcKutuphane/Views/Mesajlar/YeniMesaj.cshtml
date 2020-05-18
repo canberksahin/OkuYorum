@@ -3,9 +3,6 @@
     ViewBag.Title = "YeniMesaj";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
-
-<h2 class="ml-2">Yeni Mesaj</h2>
-
 @using (Html.BeginForm("YeniMesaj", "Mesajlar", FormMethod.Post))
 {
     @Html.AntiForgeryToken()

@@ -3,8 +3,6 @@
     ViewBag.Title = "Duzenle";
 }
 
-<h2>Düzenle</h2>
-
 @using (Html.BeginForm("Duzenle", "Kitap", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
