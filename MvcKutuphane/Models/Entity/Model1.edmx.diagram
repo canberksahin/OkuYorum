@@ -22,6 +22,7 @@
         <AssociationConnector Association="DbKutuphaneModel.FK_Kitap_Yazar" ManuallyRouted="false" />
         <AssociationConnector Association="DbKutuphaneModel.FK_Hareket_Personel" />
         <EntityTypeShape EntityType="DbKutuphaneModel.Hakkimizda" Width="1.5" PointX="8.375" PointY="7.75" />
+        <EntityTypeShape EntityType="DbKutuphaneModel.Mesajlar" Width="1.5" PointX="0.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

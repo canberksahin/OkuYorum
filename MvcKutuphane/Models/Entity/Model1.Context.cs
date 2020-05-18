@@ -37,6 +37,7 @@ namespace MvcKutuphane.Models.Entity
         public virtual DbSet<Uyeler> Uyeler { get; set; }
         public virtual DbSet<Yazar> Yazar { get; set; }
         public virtual DbSet<Hakkimizda> Hakkimizda { get; set; }
+        public virtual DbSet<Mesajlar> Mesajlar { get; set; }
     
         public virtual ObjectResult<string> EnFazlaKitapYazar()
         {

@@ -26,8 +26,9 @@
         <div class="bg-light border-right" id="sidebar-wrapper">
             <div class="sidebar-heading">@Session["Mail"]</div>
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-light">Profilim</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Mesajlar</a>
+                <a href="@Url.Action("Index","Panelim")" class="list-group-item list-group-item-action bg-light">Profilim</a>
+                <a href="@Url.Action("Index","Mesajlar")" class="list-group-item list-group-item-action bg-light">Mesajlar</a>
+                <a href="@Url.Action("YeniMesaj","Mesajlar")" class="list-group-item list-group-item-action bg-light">Yeni Mesaj</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Duyurular</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Kitaplarım</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Vitrin</a>

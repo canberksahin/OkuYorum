@@ -12,20 +12,13 @@ namespace MvcKutuphane.Models.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Yazar
+    public partial class Mesajlar
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Yazar()
-        {
-            this.Kitap = new HashSet<Kitap>();
-        }
-    
         public int Id { get; set; }
-        public string Ad { get; set; }
-        public string Soyad { get; set; }
-        public string Detay { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kitap> Kitap { get; set; }
+        public string Gonderen { get; set; }
+        public string Alici { get; set; }
+        public string Konu { get; set; }
+        public string Icerik { get; set; }
+        public Nullable<System.DateTime> Tarih { get; set; }
     }
 }
