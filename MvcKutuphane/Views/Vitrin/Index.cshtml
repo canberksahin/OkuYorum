@@ -8,7 +8,7 @@
 <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0,8, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -29,7 +29,7 @@
 
 </head>
 
-<body id="page-top" >
+<body id="page-top">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" style="height:60px;" id="mainNav">
@@ -59,7 +59,7 @@
     </nav>
 
     <!-- Masthead -->
-    <header class="masthead bg-primary text-white text-center pt-5" >
+    <header class="masthead bg-primary text-white text-center pt-5">
         <div class="container d-flex align-items-center flex-column">
 
             <!-- Masthead Avatar Image -->
@@ -84,7 +84,7 @@
     </header>
 
     <!-- Portfolio Section -->
-    <section class="page-section portfolio pt-5" id="portfolio"  >
+    <section class="page-section portfolio pt-5" id="portfolio">
         <div class="container">
 
             <!-- Portfolio Section Heading -->
@@ -106,7 +106,7 @@
                 @foreach (var item in Model.Kitaplar)
                 {
                     <div class="col-md-6 col-lg-3">
-                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+                        <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#@item.Yazar1.Ad@item.Id">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white">
                                     <i class="fas fa-plus fa-3x"></i>
@@ -123,7 +123,7 @@
     </section>
 
     <!-- About Section -->
-    <section class="page-section bg-primary text-white mb-0 pt-5" id="about" >
+    <section class="page-section bg-primary text-white mb-0 pt-5" id="about">
         <div class="container">
 
             <!-- About Section Heading -->
@@ -196,7 +196,7 @@
     </section>
 
     <!-- Contact Section -->
-    <section class="page-section pt-5" id="contact" >
+    <section class="page-section pt-5" id="contact">
         <div class="container">
 
             <!-- Contact Section Heading -->
@@ -316,256 +316,63 @@
 
     <!-- Portfolio Modals -->
     <!-- Portfolio Modal 1 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
-                <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
-                                <!-- Icon Divider -->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon">
-                                        <i class="fas fa-star"></i>
+    @foreach (var item in Model.Kitaplar)
+    {
+        <div class="portfolio-modal modal fade" id="@item.Yazar1.Ad@item.Id" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+                <div class="modal-content">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i class="fas fa-times"></i>
+                        </span>
+                    </button>
+                    <div class="modal-body text-center">
+                        <div class="container">
+                            <div class="row justify-content-center">
+                                <div class="col-lg-8">
+                                    <!-- Portfolio Modal - Title -->
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">@item.Ad</h2>
+                                    <!-- Icon Divider -->
+                                    <div class="divider-custom">
+                                        <div class="divider-custom-line"></div>
+                                        <div class="divider-custom-icon">
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <div class="divider-custom-line"></div>
                                     </div>
-                                    <div class="divider-custom-line"></div>
+                                    <!-- Portfolio Modal - Image -->
+                                    <img class="img-fluid rounded mb-5" src="@Url.UrunResim(item.KitapKapak)" alt="">
+                                    <!-- Portfolio Modal - Text -->
+                                    <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
+                                    <button class="btn btn-primary" href="#" data-dismiss="modal">
+                                        <i class="fas fa-times fa-fw"></i>
+                                        Close Window
+                                    </button>
                                 </div>
-                                <!-- Portfolio Modal - Image -->
-                                <img class="img-fluid rounded mb-5" src="img/portfolio/cabin.png" alt="">
-                                <!-- Portfolio Modal - Text -->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                    <i class="fas fa-times fa-fw"></i>
-                                    Close Window
-                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+        <!-- Bootstrap core JavaScript -->
+        <script src="~/web/vendor/jquery/jquery.min.js"></script>
+        <script src="~/web/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Portfolio Modal 2 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-labelledby="portfolioModal2Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
-                <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Tasty Cake</h2>
-                                <!-- Icon Divider -->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image -->
-                                <img class="img-fluid rounded mb-5" src="img/portfolio/cake.png" alt="">
-                                <!-- Portfolio Modal - Text -->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                    <i class="fas fa-times fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Plugin JavaScript -->
+        <script src="~/web/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Portfolio Modal 3 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-labelledby="portfolioModal3Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
-                <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Circus Tent</h2>
-                                <!-- Icon Divider -->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image -->
-                                <img class="img-fluid rounded mb-5" src="img/portfolio/circus.png" alt="">
-                                <!-- Portfolio Modal - Text -->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                    <i class="fas fa-times fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Contact Form JavaScript -->
+        <script src="~/web/js/jqBootstrapValidation.js"></script>
+        <script src="~/web/js/contact_me.js"></script>
 
-    <!-- Portfolio Modal 4 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-labelledby="portfolioModal4Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
-                <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Controller</h2>
-                                <!-- Icon Divider -->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image -->
-                                <img class="img-fluid rounded mb-5" src="img/portfolio/game.png" alt="">
-                                <!-- Portfolio Modal - Text -->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                    <i class="fas fa-times fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+        <!-- Custom scripts for this template -->
+        <script src="~/web/js/freelancer.min.js"></script>
+        <!-- For Contact form -->
+        <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 
-    <!-- Portfolio Modal 5 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-labelledby="portfolioModal5Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
-                <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Locked Safe</h2>
-                                <!-- Icon Divider -->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image -->
-                                <img class="img-fluid rounded mb-5" src="img/portfolio/safe.png" alt="">
-                                <!-- Portfolio Modal - Text -->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                    <i class="fas fa-times fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Portfolio Modal 6 -->
-    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-labelledby="portfolioModal6Label" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-            <div class="modal-content">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        <i class="fas fa-times"></i>
-                    </span>
-                </button>
-                <div class="modal-body text-center">
-                    <div class="container">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <!-- Portfolio Modal - Title -->
-                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Submarine</h2>
-                                <!-- Icon Divider -->
-                                <div class="divider-custom">
-                                    <div class="divider-custom-line"></div>
-                                    <div class="divider-custom-icon">
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <div class="divider-custom-line"></div>
-                                </div>
-                                <!-- Portfolio Modal - Image -->
-                                <img class="img-fluid rounded mb-5" src="img/portfolio/submarine.png" alt="">
-                                <!-- Portfolio Modal - Text -->
-                                <p class="mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
-                                <button class="btn btn-primary" href="#" data-dismiss="modal">
-                                    <i class="fas fa-times fa-fw"></i>
-                                    Close Window
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Bootstrap core JavaScript -->
-    <script src="~/web/vendor/jquery/jquery.min.js"></script>
-    <script src="~/web/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Plugin JavaScript -->
-    <script src="~/web/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Contact Form JavaScript -->
-    <script src="~/web/js/jqBootstrapValidation.js"></script>
-    <script src="~/web/js/contact_me.js"></script>
-
-    <!-- Custom scripts for this template -->
-    <script src="~/web/js/freelancer.min.js"></script>
-    <!-- For Contact form -->
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
-
-</body>
+    </body>
 
 </html>
 
