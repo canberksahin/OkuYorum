@@ -36,16 +36,16 @@ namespace MvcKutuphane.Common
             WebImage img = new WebImage(resim.InputStream);
             int minBoyut = Math.Min(img.Width, img.Height);
             int maxBoyut = Math.Max(img.Width, img.Height);
-            int kirpmaMiktar = (maxBoyut - minBoyut) / 2;
+            int kirpmaMiktar = (maxBoyut - minBoyut) / 4;
 
-            if (img.Height > minBoyut)
-            {
-                img.Crop(kirpmaMiktar, 0, kirpmaMiktar, 0);
-            }
-            else if (img.Width > minBoyut)
-            {
-                img.Crop(0, kirpmaMiktar, 0, kirpmaMiktar);
-            }
+            //if (img.Height > minBoyut)
+            //{
+            //    img.Crop(kirpmaMiktar, 0, kirpmaMiktar, 0);
+            //}
+            //else if (img.Width > minBoyut)
+            //{
+            //    img.Crop(0, kirpmaMiktar, 0, kirpmaMiktar);
+            //}
             #endregion
 
             img.Save(kaydetYol);

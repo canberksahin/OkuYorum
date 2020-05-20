@@ -11,34 +11,28 @@ namespace MvcKutuphane.Models.Entity
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations.Schema;
-
-    public partial class Yazar
+    
+    public partial class Yorums
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Yazar()
+        public Yorums()
         {
-            this.Kitap = new HashSet<Kitap>();
-            this.Yorums = new HashSet<Yorums>();
+            this.Yorums1 = new HashSet<Yorums>();
         }
-
-        [NotMapped]
-        public string FullName
-        {
-            get
-            {
-                return Ad + " " + Soyad;
-            }
-        }
-
-        public int Id { get; set; }
-        public string Ad { get; set; }
-        public string Soyad { get; set; }
-        public string Detay { get; set; }
     
+        public int Id { get; set; }
+        public int YazarId { get; set; }
+        public Nullable<int> ParentId { get; set; }
+        public string Icerik { get; set; }
+        public int KitapId { get; set; }
+        public Nullable<System.DateTime> YayinlanmaZamani { get; set; }
+        public Nullable<System.DateTime> DegistirmeZamani { get; set; }
+        public bool Durum { get; set; }
+    
+        public virtual Kitap Kitap { get; set; }
+        public virtual Yazar Yazar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Kitap> Kitap { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Yorums> Yorums { get; set; }
+        public virtual ICollection<Yorums> Yorums1 { get; set; }
+        public virtual Yorums Yorums2 { get; set; }
     }
 }

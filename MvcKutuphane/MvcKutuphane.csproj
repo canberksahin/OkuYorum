@@ -208,6 +208,9 @@
     <Compile Include="Models\Entity\Yazar.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity\Yorums.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2429,11 +2432,11 @@
     <Content Include="Scripts\plugins\summernote\summernote.min.js.map" />
     <Content Include="Scripts\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="Scripts\plugins\toastr\toastr.js.map" />
+    <Content Include="Upload\.gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="NewFolder1\" />
-    <Folder Include="Upload\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\IstatistikIndexViewModel\" />
   </ItemGroup>

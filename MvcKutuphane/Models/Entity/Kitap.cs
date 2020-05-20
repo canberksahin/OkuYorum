@@ -22,7 +22,9 @@ namespace MvcKutuphane.Models.Entity
         public Kitap()
         {
             this.Hareket = new HashSet<Hareket>();
+            this.Yorums = new HashSet<Yorums>();
         }
+
         [NotMapped, Display(Name = "Kitap Kapak Foto"), UrunResmi]
         public HttpPostedFileBase Foto { get; set; }
 
@@ -35,10 +37,14 @@ namespace MvcKutuphane.Models.Entity
         public string Sayfa { get; set; }
         public Nullable<bool> Durum { get; set; }
         public string KitapKapak { get; set; }
+        public string Slug { get; set; }
+        public string Ozet { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hareket> Hareket { get; set; }
         public virtual Kategori Kategori1 { get; set; }
         public virtual Yazar Yazar1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Yorums> Yorums { get; set; }
     }
 }

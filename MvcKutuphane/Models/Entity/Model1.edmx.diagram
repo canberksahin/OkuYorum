@@ -23,6 +23,10 @@
         <AssociationConnector Association="DbKutuphaneModel.FK_Hareket_Personel" />
         <EntityTypeShape EntityType="DbKutuphaneModel.Hakkimizda" Width="1.5" PointX="8.375" PointY="7.75" />
         <EntityTypeShape EntityType="DbKutuphaneModel.Mesajlar" Width="1.5" PointX="0.75" PointY="9.75" />
+        <EntityTypeShape EntityType="DbKutuphaneModel.Yorums" Width="1.5" PointX="10.25" PointY="2.625" />
+        <AssociationConnector Association="DbKutuphaneModel.FK_Yorums_Kitap" />
+        <AssociationConnector Association="DbKutuphaneModel.FK_Yorums_Yazar" />
+        <AssociationConnector Association="DbKutuphaneModel.FK_Yorums_Yorums" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

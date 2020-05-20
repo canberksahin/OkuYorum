@@ -7,47 +7,52 @@
 {
     @Html.AntiForgeryToken()
     <input type="hidden" name="Durum" value="True" />
-    <div class="form-group">
-        @Html.LabelFor(x => x.Ad)
-        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Ad, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Yazar)
-        @Html.DropDownListFor(x => x.Yazar, null, "Seçiniz", new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Yazar, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Kategori)
-        @Html.DropDownListFor(x => x.Kategori, null, "Seçiniz", new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Kategori, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.BasımYıl)
-        @Html.TextBoxFor(x => x.BasımYıl, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.BasımYıl, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Yayinevi)
-        @Html.TextBoxFor(x => x.Yayinevi, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Yayinevi, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Sayfa)
-        @Html.TextBoxFor(x => x.Sayfa, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Sayfa, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Foto)
-        <div id="onizlemeResim" class="d-none">
-            <img src="" alt="Yüklenecek Resim Önizleme" height="75" />
+
+    <div class="row">
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Ad)
+            @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Ad, null, new { @class = "text-danger" })
         </div>
-        @Html.TextBoxFor(x => x.Foto, new { type = "file", @class = "form-control-file", accept = "image/png, image/jpeg" })
-        @Html.ValidationMessageFor(x => x.Foto, null, new { @class = "text-danger" })
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Yazar)
+            @Html.DropDownListFor(x => x.Yazar, null, "Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Yazar, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Kategori)
+            @Html.DropDownListFor(x => x.Kategori, null, "Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Kategori, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.BasımYıl)
+            @Html.TextBoxFor(x => x.BasımYıl, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.BasımYıl, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Yayinevi)
+            @Html.TextBoxFor(x => x.Yayinevi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Yayinevi, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Sayfa)
+            @Html.TextBoxFor(x => x.Sayfa, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Sayfa, null, new { @class = "text-danger" })
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary">Ekle</button>
+            <a href="@Url.Action("Index","Kitap")" class="btn btn-danger">İptal</a>
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Foto)
+            <div id="onizlemeResim" class="d-none">
+                <img src="" alt="Yüklenecek Resim Önizleme" height="175" />
+            </div>
+            @Html.TextBoxFor(x => x.Foto, new { type = "file", @class = "form-control-file", accept = "image/png, image/jpeg" })
+            @Html.ValidationMessageFor(x => x.Foto, null, new { @class = "text-danger" })
+        </div>
     </div>
 
-    <button type="submit" class="btn btn-primary">Ekle</button>
-    <a href="@Url.Action("Index","Kitap")" class="btn btn-danger">İptal</a>
 }
 @section scripts {
     <script>

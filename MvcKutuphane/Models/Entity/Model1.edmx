@@ -65,6 +65,8 @@
           <Property Name="Sayfa" Type="varchar" MaxLength="4" />
           <Property Name="Durum" Type="bit" />
           <Property Name="KitapKapak" Type="varchar" MaxLength="250" />
+          <Property Name="Slug" Type="varchar" MaxLength="200" />
+          <Property Name="Ozet" Type="varchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Mesajlar">
           <Key>
@@ -116,6 +118,19 @@
           <Property Name="Ad" Type="varchar" MaxLength="30" />
           <Property Name="Soyad" Type="varchar" MaxLength="30" />
           <Property Name="Detay" Type="varchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Yorums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YazarId" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="Icerik" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="KitapId" Type="int" Nullable="false" />
+          <Property Name="YayinlanmaZamani" Type="datetime" />
+          <Property Name="DegistirmeZamani" Type="datetime" />
+          <Property Name="Durum" Type="bit" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cezalar_Hareket">
           <End Role="Hareket" Type="Self.Hareket" Multiplicity="0..1" />
@@ -201,6 +216,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Yorums_Kitap">
+          <End Role="Kitap" Type="Self.Kitap" Multiplicity="1" />
+          <End Role="Yorums" Type="Self.Yorums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Yorums">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorums_Yazar">
+          <End Role="Yazar" Type="Self.Yazar" Multiplicity="1" />
+          <End Role="Yorums" Type="Self.Yorums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Yorums">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorums_Yorums">
+          <End Role="Yorums" Type="Self.Yorums" Multiplicity="0..1" />
+          <End Role="Yorums1" Type="Self.Yorums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yorums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Yorums1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="AlinanKitapSayisi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="EnAktifKitap" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="EnAktifUye" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -219,6 +270,7 @@
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Uyeler" EntityType="Self.Uyeler" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Yazar" EntityType="Self.Yazar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yorums" EntityType="Self.Yorums" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cezalar_Hareket" Association="Self.FK_Cezalar_Hareket">
             <End Role="Hareket" EntitySet="Hareket" />
             <End Role="Cezalar" EntitySet="Cezalar" />
@@ -246,6 +298,18 @@
           <AssociationSet Name="FK_Kitap_Yazar" Association="Self.FK_Kitap_Yazar">
             <End Role="Yazar" EntitySet="Yazar" />
             <End Role="Kitap" EntitySet="Kitap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorums_Kitap" Association="Self.FK_Yorums_Kitap">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="Yorums" EntitySet="Yorums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorums_Yazar" Association="Self.FK_Yorums_Yazar">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="Yorums" EntitySet="Yorums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorums_Yorums" Association="Self.FK_Yorums_Yorums">
+            <End Role="Yorums" EntitySet="Yorums" />
+            <End Role="Yorums1" EntitySet="Yorums" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -315,6 +379,9 @@
           <NavigationProperty Name="Kategori1" Relationship="Self.FK_Kitap_Kategori" FromRole="Kitap" ToRole="Kategori" />
           <NavigationProperty Name="Yazar1" Relationship="Self.FK_Kitap_Yazar" FromRole="Kitap" ToRole="Yazar" />
           <Property Name="KitapKapak" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Yorums" Relationship="DbKutuphaneModel.FK_Yorums_Kitap" FromRole="Kitap" ToRole="Yorums" />
+          <Property Name="Slug" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Ozet" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Personel">
           <Key>
@@ -359,6 +426,7 @@
           <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Detay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Kitap" Relationship="Self.FK_Kitap_Yazar" FromRole="Yazar" ToRole="Kitap" />
+          <NavigationProperty Name="Yorums" Relationship="DbKutuphaneModel.FK_Yorums_Yazar" FromRole="Yazar" ToRole="Yorums" />
         </EntityType>
         <Association Name="FK_Cezalar_Hareket">
           <End Role="Hareket" Type="Self.Hareket" Multiplicity="0..1" />
@@ -478,6 +546,19 @@
           <FunctionImport Name="EnIyiPersonel" ReturnType="Collection(String)" />
           <FunctionImport Name="EnIyiYayinEvi" ReturnType="Collection(String)" />
           <EntitySet Name="Mesajlar" EntityType="DbKutuphaneModel.Mesajlar" />
+          <EntitySet Name="Yorums" EntityType="DbKutuphaneModel.Yorums" />
+          <AssociationSet Name="FK_Yorums_Kitap" Association="DbKutuphaneModel.FK_Yorums_Kitap">
+            <End Role="Kitap" EntitySet="Kitap" />
+            <End Role="Yorums" EntitySet="Yorums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorums_Yazar" Association="DbKutuphaneModel.FK_Yorums_Yazar">
+            <End Role="Yazar" EntitySet="Yazar" />
+            <End Role="Yorums" EntitySet="Yorums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Yorums_Yorums" Association="DbKutuphaneModel.FK_Yorums_Yorums">
+            <End Role="Yorums" EntitySet="Yorums" />
+            <End Role="Yorums1" EntitySet="Yorums" />
+          </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Hareket_Personel">
           <End Type="DbKutuphaneModel.Personel" Role="Personel" Multiplicity="0..1" />
@@ -509,6 +590,59 @@
           <Property Name="Icerik" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Tarih" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="Yorums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YazarId" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="Icerik" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="KitapId" Type="Int32" Nullable="false" />
+          <Property Name="YayinlanmaZamani" Type="DateTime" Precision="3" />
+          <Property Name="DegistirmeZamani" Type="DateTime" Precision="3" />
+          <Property Name="Durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Kitap" Relationship="DbKutuphaneModel.FK_Yorums_Kitap" FromRole="Yorums" ToRole="Kitap" />
+          <NavigationProperty Name="Yazar" Relationship="DbKutuphaneModel.FK_Yorums_Yazar" FromRole="Yorums" ToRole="Yazar" />
+          <NavigationProperty Name="Yorums1" Relationship="DbKutuphaneModel.FK_Yorums_Yorums" FromRole="Yorums" ToRole="Yorums1" />
+          <NavigationProperty Name="Yorums2" Relationship="DbKutuphaneModel.FK_Yorums_Yorums" FromRole="Yorums1" ToRole="Yorums" />
+        </EntityType>
+        <Association Name="FK_Yorums_Kitap">
+          <End Type="DbKutuphaneModel.Kitap" Role="Kitap" Multiplicity="1" />
+          <End Type="DbKutuphaneModel.Yorums" Role="Yorums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kitap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Yorums">
+              <PropertyRef Name="KitapId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorums_Yazar">
+          <End Type="DbKutuphaneModel.Yazar" Role="Yazar" Multiplicity="1" />
+          <End Type="DbKutuphaneModel.Yorums" Role="Yorums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yazar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Yorums">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Yorums_Yorums">
+          <End Type="DbKutuphaneModel.Yorums" Role="Yorums" Multiplicity="0..1" />
+          <End Type="DbKutuphaneModel.Yorums" Role="Yorums1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Yorums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Yorums1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -562,6 +696,8 @@
           <EntitySetMapping Name="Kitap">
             <EntityTypeMapping TypeName="DbKutuphaneModel.Kitap">
               <MappingFragment StoreEntitySet="Kitap">
+                <ScalarProperty Name="Ozet" ColumnName="Ozet" />
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
                 <ScalarProperty Name="KitapKapak" ColumnName="KitapKapak" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />
@@ -640,6 +776,20 @@
                 <ScalarProperty Name="Konu" ColumnName="Konu" />
                 <ScalarProperty Name="Alici" ColumnName="Alici" />
                 <ScalarProperty Name="Gonderen" ColumnName="Gonderen" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yorums">
+            <EntityTypeMapping TypeName="DbKutuphaneModel.Yorums">
+              <MappingFragment StoreEntitySet="Yorums">
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="DegistirmeZamani" ColumnName="DegistirmeZamani" />
+                <ScalarProperty Name="YayinlanmaZamani" ColumnName="YayinlanmaZamani" />
+                <ScalarProperty Name="KitapId" ColumnName="KitapId" />
+                <ScalarProperty Name="Icerik" ColumnName="Icerik" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="YazarId" ColumnName="YazarId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

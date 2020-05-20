@@ -9,7 +9,7 @@ namespace MvcKutuphane.Models.Classes
 {
     public class VitrinIndexViewModel
     {
-        public IEnumerable<Kitap> Kitaplar { get; set; }
+        public List<Kitap> Kitaplar { get; set; }
         public IEnumerable<Hakkimizda> Hakkimizda { get; set; }
     }
 }
