@@ -40,8 +40,10 @@
             @Html.ValidationMessageFor(x => x.Sayfa, null, new { @class = "text-danger" })
         </div>
         <div class="col-6">
-            <button type="submit" class="btn btn-primary">Ekle</button>
-            <a href="@Url.Action("Index","Kitap")" class="btn btn-danger">İptal</a>
+            @Html.LabelFor(x => x.Slug)
+            @Html.TextBoxFor(x => x.Slug, new { @class = "form-control flex-fill ml-2", placeholder = "a-sample-url" })
+            <a id="refreshSlug" href="#" class="mx-1 text-secondary"><i class="fas fa-sync-alt"></i></a>
+            @Html.ValidationMessageFor(x => x.Slug, null, new { @class = "text-danger" })
         </div>
         <div class="form-group col-6">
             @Html.LabelFor(x => x.Foto)
@@ -50,6 +52,10 @@
             </div>
             @Html.TextBoxFor(x => x.Foto, new { type = "file", @class = "form-control-file", accept = "image/png, image/jpeg" })
             @Html.ValidationMessageFor(x => x.Foto, null, new { @class = "text-danger" })
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary">Ekle</button>
+            <a href="@Url.Action("Index","Kitap")" class="btn btn-danger">İptal</a>
         </div>
     </div>
 
@@ -74,5 +80,7 @@
                 $("#onizlemeResim").addClass("d-none");
             }
         });
+
+        slug.run("#Ad", "#Slug", "#refreshSlug");
     </script>
 }

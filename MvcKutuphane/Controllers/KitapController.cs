@@ -38,6 +38,7 @@ namespace MvcKutuphane.Controllers
             {
                 kit.KitapKapak = this.UrunResimKaydet(kit.Foto);
                 db.Kitap.Add(kit);
+                kit.Slug = UrlService.URLFriendly(kit.Slug);
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Yeni kitap başarıyla eklenmiştir.";
                 return RedirectToAction("Index");
@@ -91,6 +92,7 @@ namespace MvcKutuphane.Controllers
                 dbKitap.BasımYıl = yaz.BasımYıl;
                 dbKitap.Kategori = yaz.Kategori;
                 dbKitap.Sayfa = yaz.Sayfa;
+                dbKitap.Slug = UrlService.URLFriendly(yaz.Slug);
                 dbKitap.Yazar = yaz.Yazar;
                 db.SaveChanges();
                 TempData["SuccessMessage"] = "Kitap başarıyla düzenlenmiştir.";
@@ -117,6 +119,23 @@ namespace MvcKutuphane.Controllers
             db.SaveChanges();
 
             return RedirectToAction("Duzenle", new { id = id });
+        }
+
+        // GET: article/333/sample-post-1
+        [Route("Kitaplar/{id}/{slug?}")]
+        public ActionResult Show(int id, string slug)
+        {
+            var kitap = db.Kitap.Find(id);
+            if (kitap == null)
+            {
+                return HttpNotFound();
+            }
+            if (kitap.Slug != slug)
+            {
+                return RedirectToAction("Show", new { id = id, slug = kitap.Slug });
+            }
+
+            return View(kitap);
         }
     }
 }

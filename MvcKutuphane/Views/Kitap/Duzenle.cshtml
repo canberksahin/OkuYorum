@@ -6,57 +6,68 @@
 @using (Html.BeginForm("Duzenle", "Kitap", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    <div class="form-group  ">
-        @Html.LabelFor(x => x.Ad)
-        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Ad, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group  ">
-        @Html.LabelFor(x => x.Yazar)
-        @Html.DropDownListFor(x => x.Yazar, null, "Seçiniz", new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Yazar, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Kategori)
-        @Html.DropDownListFor(x => x.Kategori, null, "Seçiniz", new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Kategori, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.BasımYıl)
-        @Html.TextBoxFor(x => x.BasımYıl, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.BasımYıl, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Yayinevi)
-        @Html.TextBoxFor(x => x.Yayinevi, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Yayinevi, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Sayfa)
-        @Html.TextBoxFor(x => x.Sayfa, new { @class = "form-control" })
-        @Html.ValidationMessageFor(x => x.Sayfa, null, new { @class = "text-danger" })
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(x => x.Foto)
-
-        <div id="mevcutResim">
-            <img src="@Url.UrunResim(Model.KitapKapak)" alt="Ürün Resmi" height="75" />
-            @if (!string.IsNullOrEmpty(Model.KitapKapak))
-            {
-                <div>
-                    <a href="#" onclick="document.resimSilForm.submit()">Resmi Sil</a>
-                </div>
-            }
+    <div class="row">
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Ad)
+            @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Ad, null, new { @class = "text-danger" })
         </div>
-
-        <div id="onizlemeResim" class="d-none">
-            <img src="" alt="Yüklenecek Resim Önizleme" height="75" />
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Yazar)
+            @Html.DropDownListFor(x => x.Yazar, null, "Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Yazar, null, new { @class = "text-danger" })
         </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Kategori)
+            @Html.DropDownListFor(x => x.Kategori, null, "Seçiniz", new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Kategori, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.BasımYıl)
+            @Html.TextBoxFor(x => x.BasımYıl, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.BasımYıl, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Yayinevi)
+            @Html.TextBoxFor(x => x.Yayinevi, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Yayinevi, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group col-6">
+            @Html.LabelFor(x => x.Sayfa)
+            @Html.TextBoxFor(x => x.Sayfa, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Sayfa, null, new { @class = "text-danger" })
+        </div>
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary">Ekle</button>
+            <a href="@Url.Action("Index","Kitap")" class="btn btn-danger">İptal</a>
+        </div>
+        <div class="col-6">
+            @Html.LabelFor(x => x.Slug)
+            @Html.TextBoxFor(x => x.Slug, new { @class = "form-control flex-fill ml-2", placeholder = "a-sample-url" })
+            <a id="refreshSlug" href="#" class="mx-1 text-secondary"><i class="fas fa-sync-alt"></i></a>
+            @Html.ValidationMessageFor(x => x.Slug, null, new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(x => x.Foto)
 
-        @Html.TextBoxFor(x => x.Foto, new { type = "file", @class = "form-control-file mt-1", accept = "image/png, image/jpeg" })
-        @Html.ValidationMessageFor(x => x.Foto, null, new { @class = "text-danger" })
+            <div id="mevcutResim">
+                <img src="@Url.UrunResim(Model.KitapKapak)" alt="Ürün Resmi" height="75" />
+                @if (!string.IsNullOrEmpty(Model.KitapKapak))
+                {
+                    <div>
+                        <a href="#" onclick="document.resimSilForm.submit()">Resmi Sil</a>
+                    </div>
+                }
+            </div>
+
+            <div id="onizlemeResim" class="d-none">
+                <img src="" alt="Yüklenecek Resim Önizleme" height="75" />
+            </div>
+
+            @Html.TextBoxFor(x => x.Foto, new { type = "file", @class = "form-control-file mt-1", accept = "image/png, image/jpeg" })
+            @Html.ValidationMessageFor(x => x.Foto, null, new { @class = "text-danger" })
+        </div>
     </div>
-
     <button type="submit" class="btn btn-primary">Düzenle</button>
     <a href="@Url.Action("Index","Kitap")" class="btn btn-danger">İptal</a>
 }
@@ -89,5 +100,7 @@
                 $("#onizlemeResim").addClass("d-none");
             }
         });
+
+        slug.run("#Ad", "#Slug", "#refreshSlug");
     </script>
 }
