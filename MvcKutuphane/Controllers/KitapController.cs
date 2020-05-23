@@ -185,5 +185,10 @@ namespace MvcKutuphane.Controllers
             };
             return View(vm);
         }
+
+        public ActionResult CategoriesPartial()
+        {
+            return PartialView("_CategoriesPartial", db.Kategori.OrderBy(X => X.Ad).ToList());
+        }
     }
 }

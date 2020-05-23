@@ -11,8 +11,10 @@
     <title>Yönetim Paneli</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="~/panel/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/fontawesome-all.min.css" rel="stylesheet" />
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/croppie")
+    @Styles.Render("~/Content/fontawesome")
+    @Styles.Render("~/Content/css")
     <!-- Custom styles for this template -->
     <link href="~/panel/css/simple-sidebar.css" rel="stylesheet">
 
@@ -75,8 +77,11 @@
     </div>
     <!-- /#wrapper -->
     <!-- Bootstrap core JavaScript -->
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/panel/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bs-custom-file-input")
+    @Scripts.Render("~/bundles/croppie")
+    @Scripts.Render("~/bundles/site")
     <script src="~/Scripts/bootstrap-switch.min.js"></script>
     <!-- Menu Toggle Script -->
     <script>

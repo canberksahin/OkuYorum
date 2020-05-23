@@ -2444,8 +2444,10 @@
     <Content Include="Scripts\plugins\sweetalert2-theme-bootstrap-4\bootstrap-4.scss" />
     <Content Include="Scripts\plugins\toastr\toastr.js.map" />
     <Content Include="Upload\.gitignore" />
-    <Content Include="Views\Kitap\Show.cshtml" />
     <Content Include="Views\Shared\_CommentFormPartial.cshtml" />
+    <Content Include="Views\Shared\_LayoutShow.cshtml" />
+    <Content Include="Views\Kitap\Show.cshtml" />
+    <Content Include="Views\Kitap\_CategoriesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,13 @@
+﻿@model List<Kategori>
+<ul class="list-unstyled mb-0">
+    <li>
+        @*@Html.RouteLink("All", "HomeDefault")*@
+    </li>
+    @foreach (var item in Model)
+    {
+        <li>
+            <a href="@Url.Action("Index","Home"@*,new { cid = item.Id,slug = item.Slug}*@)">@item.Ad</a>
+        </li>
+
+    }
+</ul>
