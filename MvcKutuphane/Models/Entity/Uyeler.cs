@@ -19,6 +19,7 @@ namespace MvcKutuphane.Models.Entity
         {
             this.Cezalar = new HashSet<Cezalar>();
             this.Hareket = new HashSet<Hareket>();
+            this.Yorums = new HashSet<Yorums>();
         }
     
         public int Id { get; set; }
@@ -35,5 +36,7 @@ namespace MvcKutuphane.Models.Entity
         public virtual ICollection<Cezalar> Cezalar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hareket> Hareket { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Yorums> Yorums { get; set; }
     }
 }

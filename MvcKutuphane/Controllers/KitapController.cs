@@ -1,5 +1,6 @@
 ﻿using MvcKutuphane.Common;
 using MvcKutuphane.Models.Entity;
+using MvcKutuphane.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -121,7 +122,7 @@ namespace MvcKutuphane.Controllers
             return RedirectToAction("Duzenle", new { id = id });
         }
 
-        // GET: article/333/sample-post-1
+        // GET: Kitaplar/333/sample-post-1
         [Route("Kitaplar/{id}/{slug?}")]
         public ActionResult Show(int id, string slug)
         {
@@ -134,8 +135,55 @@ namespace MvcKutuphane.Controllers
             {
                 return RedirectToAction("Show", new { id = id, slug = kitap.Slug });
             }
+            var vm = new MvcKutuphane.ViewModels.KitapShowViewModel
+            {
+                Kitap = kitap,
+                YorumViewModel = new ViewModels.YorumViewModel()
+            };
 
-            return View(kitap);
+            return View(vm);
+        }
+
+        [Route("Kitaplar/{id}/{slug?}")]
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Show(int id, string slug, YorumViewModel commentViewModel)
+        {
+            var post = db.Kitap.Find(id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            if (post.Slug != slug)
+            {
+                return RedirectToAction("Show", new { id = id, slug = post.Slug });
+            }
+
+            if (ModelState.IsValid)
+            {
+                string mail = Session["mail"].ToString();
+                var yazar = db.Uyeler.FirstOrDefault(z=>z.Mail==mail);
+                var comment = new Yorums
+                {
+                    YazarId = yazar.Id,
+                    Icerik = commentViewModel.Content,
+                    YayinlanmaZamani = DateTime.Now,
+                    DegistirmeZamani = DateTime.Now,
+                    Durum = true,
+                    KitapId = id,
+                    ParentId = commentViewModel.ParentId
+                };
+                db.Yorums.Add(comment);
+                db.SaveChanges();
+                return Redirect(Url.RouteUrl(new { controller = "Kitap", action = "Show", id = id, slug = slug, commentSuccess = true }) + "#leave-a-comment");
+
+            }
+
+            var vm = new KitapShowViewModel
+            {
+                Kitap = post,
+                YorumViewModel = commentViewModel
+            };
+            return View(vm);
         }
     }
 }

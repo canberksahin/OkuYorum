@@ -228,11 +228,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Yorums_Yazar">
-          <End Role="Yazar" Type="Self.Yazar" Multiplicity="1" />
+        <Association Name="FK_Yorums_Uyeler">
+          <End Role="Uyeler" Type="Self.Uyeler" Multiplicity="1" />
           <End Role="Yorums" Type="Self.Yorums" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Yazar">
+            <Principal Role="Uyeler">
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="Yorums">
@@ -258,6 +258,37 @@
         <Function Name="EnFazlaKitapYazar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="EnIyiPersonel" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="EnIyiYayinEvi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="DbKutuphaneModelStoreContainer">
           <EntitySet Name="Cezalar" EntityType="Self.Cezalar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hakkimizda" EntityType="Self.Hakkimizda" Schema="dbo" store:Type="Tables" />
@@ -303,8 +334,8 @@
             <End Role="Kitap" EntitySet="Kitap" />
             <End Role="Yorums" EntitySet="Yorums" />
           </AssociationSet>
-          <AssociationSet Name="FK_Yorums_Yazar" Association="Self.FK_Yorums_Yazar">
-            <End Role="Yazar" EntitySet="Yazar" />
+          <AssociationSet Name="FK_Yorums_Uyeler" Association="Self.FK_Yorums_Uyeler">
+            <End Role="Uyeler" EntitySet="Uyeler" />
             <End Role="Yorums" EntitySet="Yorums" />
           </AssociationSet>
           <AssociationSet Name="FK_Yorums_Yorums" Association="Self.FK_Yorums_Yorums">
@@ -416,6 +447,7 @@
           <Property Name="Okul" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Cezalar" Relationship="Self.FK_Cezalar_Uyeler" FromRole="Uyeler" ToRole="Cezalar" />
           <NavigationProperty Name="Hareket" Relationship="Self.FK_Hareket_Uyeler" FromRole="Uyeler" ToRole="Hareket" />
+          <NavigationProperty Name="Yorums" Relationship="DbKutuphaneModel.FK_Yorums_Uyeler" FromRole="Uyeler" ToRole="Yorums" />
         </EntityType>
         <EntityType Name="Yazar">
           <Key>
@@ -426,7 +458,6 @@
           <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Detay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Kitap" Relationship="Self.FK_Kitap_Yazar" FromRole="Yazar" ToRole="Kitap" />
-          <NavigationProperty Name="Yorums" Relationship="DbKutuphaneModel.FK_Yorums_Yazar" FromRole="Yazar" ToRole="Yorums" />
         </EntityType>
         <Association Name="FK_Cezalar_Hareket">
           <End Role="Hareket" Type="Self.Hareket" Multiplicity="0..1" />
@@ -551,14 +582,44 @@
             <End Role="Kitap" EntitySet="Kitap" />
             <End Role="Yorums" EntitySet="Yorums" />
           </AssociationSet>
-          <AssociationSet Name="FK_Yorums_Yazar" Association="DbKutuphaneModel.FK_Yorums_Yazar">
-            <End Role="Yazar" EntitySet="Yazar" />
-            <End Role="Yorums" EntitySet="Yorums" />
-          </AssociationSet>
           <AssociationSet Name="FK_Yorums_Yorums" Association="DbKutuphaneModel.FK_Yorums_Yorums">
             <End Role="Yorums" EntitySet="Yorums" />
             <End Role="Yorums1" EntitySet="Yorums" />
           </AssociationSet>
+          <AssociationSet Name="FK_Yorums_Uyeler" Association="DbKutuphaneModel.FK_Yorums_Uyeler">
+            <End Role="Uyeler" EntitySet="Uyeler" />
+            <End Role="Yorums" EntitySet="Yorums" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(DbKutuphaneModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(DbKutuphaneModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <Association Name="FK_Hareket_Personel">
           <End Type="DbKutuphaneModel.Personel" Role="Personel" Multiplicity="0..1" />
@@ -603,9 +664,9 @@
           <Property Name="DegistirmeZamani" Type="DateTime" Precision="3" />
           <Property Name="Durum" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Kitap" Relationship="DbKutuphaneModel.FK_Yorums_Kitap" FromRole="Yorums" ToRole="Kitap" />
-          <NavigationProperty Name="Yazar" Relationship="DbKutuphaneModel.FK_Yorums_Yazar" FromRole="Yorums" ToRole="Yazar" />
           <NavigationProperty Name="Yorums1" Relationship="DbKutuphaneModel.FK_Yorums_Yorums" FromRole="Yorums" ToRole="Yorums1" />
           <NavigationProperty Name="Yorums2" Relationship="DbKutuphaneModel.FK_Yorums_Yorums" FromRole="Yorums1" ToRole="Yorums" />
+          <NavigationProperty Name="Uyeler" Relationship="DbKutuphaneModel.FK_Yorums_Uyeler" FromRole="Yorums" ToRole="Uyeler" />
         </EntityType>
         <Association Name="FK_Yorums_Kitap">
           <End Type="DbKutuphaneModel.Kitap" Role="Kitap" Multiplicity="1" />
@@ -616,18 +677,6 @@
             </Principal>
             <Dependent Role="Yorums">
               <PropertyRef Name="KitapId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Yorums_Yazar">
-          <End Type="DbKutuphaneModel.Yazar" Role="Yazar" Multiplicity="1" />
-          <End Type="DbKutuphaneModel.Yorums" Role="Yorums" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Yazar">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Yorums">
-              <PropertyRef Name="YazarId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -643,6 +692,29 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Yorums_Uyeler">
+          <End Type="DbKutuphaneModel.Uyeler" Role="Uyeler" Multiplicity="1" />
+          <End Type="DbKutuphaneModel.Yorums" Role="Yorums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Uyeler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Yorums">
+              <PropertyRef Name="YazarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -794,6 +866,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="DbKutuphaneModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="DbKutuphaneModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="DbKutuphaneModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="DbKutuphaneModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbKutuphaneModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="DbKutuphaneModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DbKutuphaneModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="DbKutuphaneModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="DbKutuphaneModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

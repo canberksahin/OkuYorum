@@ -30,9 +30,9 @@ namespace MvcKutuphane.Models.Entity
         public bool Durum { get; set; }
     
         public virtual Kitap Kitap { get; set; }
-        public virtual Yazar Yazar { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Yorums> Yorums1 { get; set; }
         public virtual Yorums Yorums2 { get; set; }
+        public virtual Uyeler Uyeler { get; set; }
     }
 }

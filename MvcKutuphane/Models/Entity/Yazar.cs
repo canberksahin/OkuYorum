@@ -19,7 +19,6 @@ namespace MvcKutuphane.Models.Entity
         public Yazar()
         {
             this.Kitap = new HashSet<Kitap>();
-            this.Yorums = new HashSet<Yorums>();
         }
 
         [NotMapped]
@@ -38,7 +37,5 @@ namespace MvcKutuphane.Models.Entity
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Kitap> Kitap { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Yorums> Yorums { get; set; }
     }
 }

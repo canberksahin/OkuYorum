@@ -24,10 +24,7 @@ namespace MvcKutuphane.Models.Entity
             this.Hareket = new HashSet<Hareket>();
             this.Yorums = new HashSet<Yorums>();
         }
-
-        [NotMapped, Display(Name = "Kitap Kapak Foto"), UrunResmi]
-        public HttpPostedFileBase Foto { get; set; }
-
+    
         public int Id { get; set; }
         public string Ad { get; set; }
         public Nullable<byte> Kategori { get; set; }
@@ -39,7 +36,10 @@ namespace MvcKutuphane.Models.Entity
         public string KitapKapak { get; set; }
         public string Slug { get; set; }
         public string Ozet { get; set; }
-    
+
+        [NotMapped, Display(Name = "Kitap Kapak Foto"), UrunResmi]
+        public HttpPostedFileBase Foto { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hareket> Hareket { get; set; }
         public virtual Kategori Kategori1 { get; set; }

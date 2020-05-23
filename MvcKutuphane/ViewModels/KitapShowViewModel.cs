@@ -8,8 +8,8 @@ namespace MvcKutuphane.ViewModels
 {
     public class KitapShowViewModel
     {
-        public List<Kitap> Kitaplar { get; set; }
+        public Kitap Kitap { get; set; }
 
-        public List<Yorums> Yorumlar { get; set; }
+        public YorumViewModel YorumViewModel { get; set; }
     }
 }

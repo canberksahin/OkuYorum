@@ -1,18 +1,144 @@
-﻿@model Kitap
+﻿@*https://startbootstrap.com/templates/blog-post/*@
+@model KitapShowViewModel
 @{
-    Layout = null;
+    ViewBag.Title = Model.Kitap.Ad;
 }
+<div>
+    <!-- Title -->
+    <h1 class="mt-1">@Model.Kitap.Ad</h1>
 
-<!DOCTYPE html>
+    <!-- Author -->
+    <p class="lead">
+        by
+        <a href="#">@Model.Kitap.Yazar1.FullName</a>
+    </p>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Show</title>
-</head>
-<body>
-    <div> 
-        @Model.Ad
+    <hr />
+
+    <!-- Date/Time -->
+    <p>Posted on @Model.Kitap.BasımYıl</p>
+
+    <hr />
+
+    <!-- Preview Image -->
+    @if (!string.IsNullOrEmpty(Model.Kitap.KitapKapak))
+    {
+        <img src="@Url.UrunResim(Model.Kitap.KitapKapak)" alt="Kitap Featured Image" class="img-fluid rounded" />
+        <hr />
+    }
+
+
+    <!-- Post Content -->
+    @Html.Raw(Model.Kitap.Ozet)
+
+    <hr />
+
+    <!-- Comments Form -->
+    <div class="card my-4" id="leave-a-comment">
+        <h5 class="card-header">Bir yorum bırakın:</h5>
+        <div class="card-body">
+            @if (Request.QueryString["commentSuccess"] == "True")
+            {
+                <div class="alert alert-success">
+                    Yorumunuz başarıyla eklenmiştir.
+                </div>
+            }
+            @if (Request.IsAuthenticated)
+            {
+                @Html.Partial("_CommentFormPartial", Model.YorumViewModel)
+            }
+            else
+            {
+                <p class="text-center mt-3">Yorum yapabilmeniz için lütfen, @Html.ActionLink("Giriş Yapınız", "GirisYap", "Login", new { returnUrl = Request.Url.AbsolutePath }, null) ya da @Html.ActionLink("Kayıt Olunuz", "Kayit", "KayitOl") </p>
+            }
+        </div>
     </div>
-</body>
-</html>
+
+    <!-- Comments -->
+    <div id="comments">
+        @foreach (var item in Model.Kitap.Yorums.
+       Where(x => x.Durum == true && x.ParentId == null).
+       OrderByDescending(x => x.YayinlanmaZamani))
+        {
+            <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="@Url.UrunResim(item.Uyeler.Fotograf)" alt="" width="50" height="50">
+                <div class="media-body">
+                    <h5 class="mt-0">@item.Uyeler.KullaniciAdi</h5>
+                    @item.Icerik <br />
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="" class="replay-button" data-comment-id="@item.Id">Reply</a>
+                    }
+                    else
+                    {
+                        <a href="" class="replay-button yukari" data-comment-id="@item.Id">Reply</a>
+                    }
+                    <div class="reply-form-wrapper"></div>
+
+                    @foreach (var subcomment in item.Yorums1.
+                        Where(x => x.Durum == true).
+                        OrderBy(x => x.YayinlanmaZamani))
+                    {
+                        <div class="media mt-4">
+                            <img class="d-flex mr-3 rounded-circle" src="@Url.UrunResim(subcomment.Uyeler.Fotograf)" alt="" width="50" height="50">
+                            <div class="media-body">
+                                <h5 class="mt-0">@subcomment.Uyeler.KullaniciAdi</h5>
+                                @subcomment.Icerik
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+
+</div>
+
+@section scripts {
+    <script>
+        setTimeout(function () {
+            if (location.hash == "#leave-a-comment") {
+                window.scrollTo(0, $("#leave-a-comment").offset().top - 65);
+
+            }
+
+        }, 100);
+
+        setTimeout(function () {
+            if (location.hash == "#comments") {
+                window.scrollTo(0, $("#comments").offset().top - 65);
+
+            }
+
+        }, 100);
+
+        $(".yukari").click(function () {
+            window.scrollTo(0, $("#leave-a-comment").offset().top - 265);
+        });
+        $(".replay-button").click(function (event) {
+
+            var commentId = $(this).data("comment-id");
+            event.preventDefault();
+
+            //zaten tıklanmışsa kapat
+            if ($(this).next(".reply-form-wrapper").html()) {
+                $(this).next(".reply-form-wrapper").html("");
+                return;
+            }
+            var frm = $("#leave-a-comment form").clone();
+
+            // change style of the clone
+            frm.addClass("d-flex justify-content-end");
+            frm.find(".form-group").addClass("flex-fill mb-0");
+            frm.find("button").addClass("btn-sm align-self-end ml-1");
+
+
+
+            frm.find("#ParentId").val(commentId);
+            $(".reply-form-wrapper").html("");
+            $(this).next(".reply-form-wrapper").html(frm);
+        });
+    </script>
+}
