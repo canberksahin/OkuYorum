@@ -4,73 +4,167 @@
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 
-<h2 class="my-4">Kütüphane Üye Profil Bilgileri <a class="float-right btn btn-primary " href="@Url.Action("ProfilGuncelle")">Profil Bilgilerini Güncelle</a></h2>
+<h2 class="my-4 ml-4">OkuYorum Üye Profil Bilgileri <a class="float-right btn btn-primary mr-4 " href="@Url.Action("ProfilGuncelle")">Profil Bilgilerini Güncelle</a></h2>
 
-<table class="table table-stripped table-hover">
-    <tbody>
-        <tr class="row">
-            <td class="col-3 border-right">
-                <label>Öğrenci Id</label>
-            </td>
-            <td class="col-9">
-                @Html.DisplayFor(x => x.Id)
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="col-3 border-right">
-                <label>Mail Adresi</label>
-            </td>
-            <td class="col-9">
-                @Html.DisplayFor(x => x.Mail)
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="col-3 border-right">
-                <label>Ad</label>
-            </td>
-            <td class="col-9">
-                @Html.DisplayFor(x => x.Ad)
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="col-3 border-right">
-                <label>Soyad</label>
-            </td>
-            <td class="col-9">
-                @Html.DisplayFor(x => x.Soyad)
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="col-3 border-right">
-                <label>Kullanıcı Adı</label>
-            </td>
-            <td class="col-9">
-                @Html.DisplayFor(x => x.KullaniciAdi)
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="col-3 border-right">
-                <label>Şifre</label>
-            </td>
-            <td class="col-9">
-                @Html.DisplayFor(x => x.Sifre)
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="col-3 border-right border-bottom">
-                <label>Okul</label>
-            </td>
-            <td class="col-9 border-bottom">
-                @Html.DisplayFor(x => x.Okul)
-            </td>
-        </tr>
-        <tr class="row">
-            <td class="col-3 border-right border-bottom">
-                <label>Fotoğraf</label>
-            </td>
-            <td class="col-9 border-bottom">
-                @Html.DisplayFor(x => x.Fotograf)
-            </td>
-        </tr>
-    </tbody>
-</table>
+<div class="row">
+    <table class="table table-stripped table-hover ml-5 col-6">
+        <tbody>
+            <tr class="row">
+                <td class="col-6 border-right">
+                    <label>Ad</label>
+                </td>
+                <td class="col-6">
+                    @Html.DisplayFor(x => x.Ad)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-6 border-right">
+                    <label>Soyad</label>
+                </td>
+                <td class="col-6">
+                    @Html.DisplayFor(x => x.Soyad)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-6 border-right">
+                    <label>Kullanıcı Adı</label>
+                </td>
+                <td class="col-6">
+                    @Html.DisplayFor(x => x.KullaniciAdi)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-6 border-right">
+                    <label>Şifre</label>
+                </td>
+                <td class="col-6">
+                    @Html.DisplayFor(x => x.Sifre)
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="col-6 border-right">
+                    <label>Mail Adresi</label>
+                </td>
+                <td class="col-6">
+                    @Html.DisplayFor(x => x.Mail)
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="col-5 text-center mt-3">
+
+        <div class="manage-profile-photo-container float-right text-center position-relative">
+
+            <div class="dropdown mt-1 position-absolute" style="bottom:3px; right:3px;">
+                <button class="btn btn-primary btn-sm " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-edit"></i>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right small" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item text-center small" href="#" data-toggle="modal" data-target="#modalChangePhoto">Değiştir</a>
+                    <a id="btnDeletePhoto" class="dropdown-item text-center small" href="#">Kaldır</a>
+                </div>
+            </div>
+            <img id="profilePhoto" class="rounded" src="@Url.LoggedInProfilePhoto()" alt="profile photo" width="250" /> <br />
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalChangePhoto" tabindex="-1" role="dialog" aria-labelledby="modalChangePhotoTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalChangePhotoTitle">Profil Resmi Seçin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="custom-file ">
+                    <input type="file" class="custom-file-input" style="max-width:600px;" id="file-input">
+                    <label class="custom-file-label " for="customFile" data-browse="Browse">Dosya seçin</label>
+                </div>
+                <div class="cropper-wrapper mt-2">
+                    <div class="cropper">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                <button id="btnUpload" type="button" class="btn btn-primary" disabled>Kırp ve Kaydet</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        var cropper = null;
+
+        $("#file-input").change(function () {
+            readFile(this);
+            if (this.files && this.files[0]) {
+                $("#btnUpload").removeAttr("disabled");
+            }
+            else {
+                $("#btnUpload").attr("disabled", "disabled");
+                if (cropper) {
+                    cropper.croppie('destroy');
+                    cropper = null;
+                }
+            }
+        });
+
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    if (cropper == null)
+                        cropper = $(".cropper").croppie({
+                            enableOrientation: true
+                        });
+
+                    cropper.croppie('bind', {
+                        url: e.target.result
+                    });
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#modalChangePhoto').on('hidden.bs.modal', function (e) {
+            $("#file-input").val(null);
+            $(".custom-file-label").text("Choose file");
+            $("#btnUpload").attr("disabled", "disabled")
+            if (cropper) {
+                cropper.croppie('destroy');
+                cropper = null;
+            }
+        });
+
+        $("#btnUpload").click(function () {
+            cropper.croppie('result', {
+                type: "base64",
+                size: { width: 400, height: 400 }
+            }).then(function (base64) {
+                // $("#profilePhoto").attr('src', base64);
+
+                $.post("/Kitap/UploadProfile", { photoBase64: base64 }, function (data) {
+                    $("#profilePhoto").attr('src', data.photoUrl);
+                    $("#modalChangePhoto").modal('hide');
+                    location.reload(true);
+                });
+            });
+        });
+
+        $("#btnDeletePhoto").click(function() {
+            $.post("@Url.Action("DeleteProfile","Kitap")", function (data) {
+                $("#profilePhoto").attr('src', data.photoUrl);
+                location.reload(true);
+            });
+        });
+
+    </script>
+}

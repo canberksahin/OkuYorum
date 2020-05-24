@@ -32,7 +32,7 @@
     <h1>Kütüphane Yönetim Sistemi</h1>
     <div class=" w3l-login-form">
         <h2>Giriş Paneli</h2>
-        <form action="/Login/GirisYap/" method="POST">
+        <form action="@Url.Action("GirisYap","Login")" method="POST">
             @Html.AntiForgeryToken()
             <div class=" w3l-form-group">
                 <label>E-Mail:</label>

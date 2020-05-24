@@ -29,7 +29,7 @@ namespace MvcKutuphane.Controllers
         {
             var uyeMail = (string)Session["Mail"];
             var uyeDb = db.Uyeler.FirstOrDefault(x => x.Mail == uyeMail);
-
+            Session["KullaniciAdi"] = uye.KullaniciAdi;
             uyeDb.Ad = uye.Ad;
             uyeDb.Soyad = uye.Soyad;
             uyeDb.Sifre = uye.Sifre;

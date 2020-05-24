@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,6 +13,36 @@ namespace MvcKutuphane.Controllers
 {
     public class KitapController : BaseController
     {
+        [HttpPost]
+        public ActionResult UploadProfile(string photoBase64)
+        {
+            if (string.IsNullOrEmpty(photoBase64))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            string fileName = this.SaveProfilePhoto(photoBase64);
+            string mail = Session["Mail"].ToString();
+            var user = db.Uyeler.FirstOrDefault(x=>x.Mail==mail);
+            this.UrunResimSil(user.Fotograf, "Profiles");
+            user.Fotograf = fileName;
+            db.SaveChanges();
+
+            return Json(new { photoUrl = Url.ProfilePhoto(fileName) });
+        }
+
+        [HttpPost]
+        public ActionResult DeleteProfile()
+        {
+            string mail = Session["Mail"].ToString();
+            var user = db.Uyeler.FirstOrDefault(x => x.Mail == mail);
+            this.UrunResimSil(user.Fotograf, "Profiles");
+            user.Fotograf = null;
+            db.SaveChanges();
+
+            return Json(new { photoUrl = Url.ProfilePhoto(null) });
+        }
+
         public ActionResult Index(string p)
         {
             var kitaplar = from k in db.Kitap select k;

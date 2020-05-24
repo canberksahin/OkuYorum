@@ -26,9 +26,12 @@
 
         <!-- Sidebar -->
         <div class="bg-light border-right" id="sidebar-wrapper">
-            <div class="sidebar-heading">@Session["Mail"]</div>
+            <div class="sidebar-heading text-center">
+                <img id="profilePhoto" class="rounded" src="@Url.LoggedInProfilePhoto()" alt="profile photo" width="100" />
+            </div>
+            <div class="sidebar-heading text-center p-0"> @Session["KullaniciAdi"]</div>
             <div class="list-group list-group-flush">
-                <a href="@Url.Action("Index","Panelim")" class="list-group-item list-group-item-action bg-light">Profilim</a>
+                <a href="@Url.Action("Index","Panelim")" class="list-group-item list-group-item-action bg-light" style="border-top:solid 1px;">Profilim</a>
                 <a href="@Url.Action("Index","Mesajlar")" class="list-group-item list-group-item-action bg-light">Gelen Kutusu</a>
                 <a href="@Url.Action("GidenKutusu","Mesajlar")" class="list-group-item list-group-item-action bg-light">Giden Kutusu</a>
                 <a href="@Url.Action("YeniMesaj","Mesajlar")" class="list-group-item list-group-item-action bg-light">Yeni Mesaj</a>
@@ -68,7 +71,7 @@
                 </div>
             </nav>
 
-            <div class="container-fluid">
+            <div class="container-fluid m-4 mr-4">
                 @RenderBody()
             </div>
         </div>
@@ -82,7 +85,10 @@
     @Scripts.Render("~/bundles/bs-custom-file-input")
     @Scripts.Render("~/bundles/croppie")
     @Scripts.Render("~/bundles/site")
+    <script src="~/Scripts/popper.js"></script>
     <script src="~/Scripts/bootstrap-switch.min.js"></script>
+    <script src="~/Scripts/admin.custom.js"></script>
+
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function (e) {
@@ -91,7 +97,7 @@
 
         });
     </script>
-
+    @RenderSection("scripts", false)
 </body>
 
 </html>

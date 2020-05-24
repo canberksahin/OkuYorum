@@ -21,7 +21,7 @@ namespace MvcKutuphane
             "~/Scripts/croppie.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/bs-custom-file-input", "https://cdn.jsdelivr.net/npm/bs-custom-file-input/dist/bs-custom-file-input.min.js").Include(
-            "~/Areas/Admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"));
+            "~/Scripts/bs-custom-file-input.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/site").Include("~/Scripts/Site.js"));
 
