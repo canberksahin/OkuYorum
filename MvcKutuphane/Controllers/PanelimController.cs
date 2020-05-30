@@ -42,7 +42,22 @@ namespace MvcKutuphane.Controllers
         public ActionResult Kitaplarım()
         {
             var uyeMail = (string)Session["Mail"];
-            return View(db.Hareket.Where(x => x.Uyeler.Mail == uyeMail).OrderByDescending(x => x.Id).ToList());
+            var uyeDb = db.Uyeler.FirstOrDefault(x => x.Mail == uyeMail);
+            return View(db.Yorums.Where(x => x.YazarId == uyeDb.Id).OrderByDescending(x => x.YayinlanmaZamani).ToList());
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult Sil(int id)
+        {
+            var kat = db.Yorums.Find(id);
+            if (kat == null)
+            {
+                return HttpNotFound();
+            }
+            db.Yorums.Remove(kat);
+            db.SaveChanges();
+            TempData["SuccessMessage"] = "Yorum başarıyla silinmiştir.";
+            return RedirectToAction("Kitaplarım","Panelim");
         }
     }
 }

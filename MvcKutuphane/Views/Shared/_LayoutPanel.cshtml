@@ -17,7 +17,7 @@
     @Styles.Render("~/Content/css")
     <!-- Custom styles for this template -->
     <link href="~/panel/css/simple-sidebar.css" rel="stylesheet">
-
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -36,8 +36,8 @@
                 <a href="@Url.Action("GidenKutusu","Mesajlar")" class="list-group-item list-group-item-action bg-light">Giden Kutusu</a>
                 <a href="@Url.Action("YeniMesaj","Mesajlar")" class="list-group-item list-group-item-action bg-light">Yeni Mesaj</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Duyurular</a>
-                <a href="@Url.Action("Kitaplarım","Panelim")" class="list-group-item list-group-item-action bg-light">Kitaplarım</a>
-                <a href="@Url.Action("Index","Vitrin")" class="list-group-item list-group-item-action bg-light">Vitrin</a>
+                <a href="@Url.Action("Kitaplarım","Panelim")" class="list-group-item list-group-item-action bg-light">Yorumlarım</a>
+                <a href="@Url.Action("Index","Home")" class="list-group-item list-group-item-action bg-light">Vitrin</a>
                 <a href="#" class="list-group-item list-group-item-action bg-light">Yardım</a>
             </div>
         </div>
@@ -63,7 +63,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">Hesabım</a>
-                                <a class="dropdown-item" href="#">Çıkış Yap</a>
+                                <a class="dropdown-item" href="@Url.Action("CikisYap","Giris")">Çıkış Yap</a>
                                 <div class="dropdown-divider"></div>
                             </div>
                         </li>
@@ -88,7 +88,7 @@
     <script src="~/Scripts/popper.js"></script>
     <script src="~/Scripts/bootstrap-switch.min.js"></script>
     <script src="~/Scripts/admin.custom.js"></script>
-
+    <script src="~/Scripts/toastr.min.js"></script>
     <!-- Menu Toggle Script -->
     <script>
         $("#menu-toggle").click(function (e) {

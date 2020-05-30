@@ -141,20 +141,18 @@
     <Compile Include="Common\UrunIslemleri.cs" />
     <Compile Include="Common\UrunResmiAttribute.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GirisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IslemController.cs" />
     <Compile Include="Controllers\IstatistikController.cs" />
     <Compile Include="Controllers\KategoriController.cs" />
-    <Compile Include="Controllers\KayitOlController.cs" />
     <Compile Include="Controllers\KitapController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MesajlarController.cs" />
     <Compile Include="Controllers\OduncController.cs" />
     <Compile Include="Controllers\PanelimController.cs" />
     <Compile Include="Controllers\PersonelController.cs" />
     <Compile Include="Controllers\SlugController.cs" />
     <Compile Include="Controllers\UyeController.cs" />
-    <Compile Include="Controllers\VitrinController.cs" />
     <Compile Include="Controllers\YazarController.cs" />
     <Compile Include="Enumlar\Durum.cs" />
     <Compile Include="Global.asax.cs">
@@ -238,6 +236,7 @@
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\girisstyle.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
@@ -2039,14 +2038,6 @@
     <Content Include="webhava\js\jquery-2.1.4.min.js" />
     <Content Include="webhava\js\skycons.js" />
     <Content Include="webhava\w3layouts-License.txt" />
-    <Content Include="weblogin\css\fontawesome-all.css" />
-    <Content Include="weblogin\css\style.css" />
-    <Content Include="weblogin\images\cover4.jpg" />
-    <Content Include="weblogin\index.html" />
-    <Content Include="weblogin\w3layouts-License.txt" />
-    <Content Include="weblogin\webfonts\fa-brands-400.svg" />
-    <Content Include="weblogin\webfonts\fa-regular-400.svg" />
-    <Content Include="weblogin\webfonts\fa-solid-900.svg" />
     <Content Include="webregister\css\font-awesome.css" />
     <Content Include="webregister\css\style.css" />
     <Content Include="webregister\fonts\fontawesome-webfont.svg" />
@@ -2320,24 +2311,11 @@
     <Content Include="web\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="web\vendor\jquery\jquery.min.map" />
     <Content Include="web\vendor\jquery\jquery.slim.min.map" />
-    <Content Include="Views\Vitrin\Index.cshtml" />
     <Content Include="Views\Istatistik\Index.cshtml" />
     <Content Include="Views\Istatistik\Hava.cshtml" />
     <Content Include="Views\Istatistik\HavaKart.cshtml" />
     <Content Include="Views\Istatistik\Galeri.cshtml" />
     <Content Include="Views\Istatistik\Cartlar.cshtml" />
-    <Content Include="weblogin\webfonts\fa-brands-400.eot" />
-    <Content Include="weblogin\webfonts\fa-brands-400.ttf" />
-    <Content Include="weblogin\webfonts\fa-brands-400.woff" />
-    <Content Include="weblogin\webfonts\fa-brands-400.woff2" />
-    <Content Include="weblogin\webfonts\fa-regular-400.eot" />
-    <Content Include="weblogin\webfonts\fa-regular-400.ttf" />
-    <Content Include="weblogin\webfonts\fa-regular-400.woff" />
-    <Content Include="weblogin\webfonts\fa-regular-400.woff2" />
-    <Content Include="weblogin\webfonts\fa-solid-900.eot" />
-    <Content Include="weblogin\webfonts\fa-solid-900.ttf" />
-    <Content Include="weblogin\webfonts\fa-solid-900.woff" />
-    <Content Include="weblogin\webfonts\fa-solid-900.woff2" />
     <Content Include="webregister\fonts\fontawesome-webfont.eot" />
     <Content Include="webregister\fonts\fontawesome-webfont.ttf" />
     <Content Include="webregister\fonts\fontawesome-webfont.woff" />
@@ -2345,8 +2323,6 @@
     <Content Include="webregister\fonts\FontAwesome.otf" />
     <Content Include="webregister\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="webregister\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Views\Login\GirisYap.cshtml" />
-    <Content Include="Views\KayitOl\Kayit.cshtml" />
     <Content Include="Views\Shared\_LayoutPanel.cshtml" />
     <Content Include="panel\.gitignore" />
     <Content Include="panel\.travis.yml" />
@@ -2454,6 +2430,7 @@
     <Content Include="Views\Kitap\_CategoriesPartial.cshtml" />
     <Content Include="Upload\Profiles\.gitignore" />
     <Content Include="Views\Kategori\Show.cshtml" />
+    <Content Include="Views\Giris\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

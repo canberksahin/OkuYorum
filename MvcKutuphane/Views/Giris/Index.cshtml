@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Giriş Yap</title>
+    <link href="~/Content/girisstyle.css" rel="stylesheet" />
+</head>
+<body>
+    <div>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+              integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+              crossorigin="anonymous">
+
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form action="@Url.Action("Kayit","Giris")" method="post">
+                    <h1>Hesap Oluşturun</h1>
+                    <input type="text" placeholder="Ad" name="Ad" />
+                    <input type="text" placeholder="Soyad" name="Soyad" />
+                    <input type="email" placeholder="Email" name="Mail"/>
+                    <input type="text" placeholder="Kullanıcı Adı" name="KullaniciAdi"/>
+                    <input type="tel" placeholder="Telefon" name="Telefon"/>
+                    <input type="password" placeholder="Sifre" name="Sifre" />
+                    <button>Kaydol</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form action="@Url.Action("GirisYap","Giris")" method="post">
+                    <h1>Giriş Yap</h1>
+                    <input type="email" placeholder="Email" name="Mail" required/>
+                    <input type="password" placeholder="Password" name="Sifre" required/>
+                    @*<a href="#">Forgot your password?</a>*@
+                    <button>Giriş Yap</button>
+                </form>
+            </div>
+            <div class="overlay-container">
+                <div class="overlay">
+                    <div class="overlay-panel overlay-left">
+                        <h1>Tekrar Hoşgeldiniz!</h1>
+                        <p>İletişimde kalabilmemiz için lütfen kişisel bilgilerinizle giriş yapın</p>
+                        <button class="ghost" id="signIn">Giriş Yap</button>
+                    </div>
+                    <div class="overlay-panel overlay-right">
+                        <h1>Merhaba, Dost!</h1>
+                        <p>Kişisel bilgilerinizi girip, yorumlarını bizimle paylaşmaya başlayabilirsin!</p>
+                        <button class="ghost" id="signUp">Kaydol</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <b>Bizi takip edebilirsiniz </b>
+            <div class="mx-auto">
+                <a href="https://github.com/canberksahin" target="_blank" class="social"><i class="fab fa-github"></i></a>
+                <a href="https://www.instagram.com/vaibhavkhulbe143/" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/in/canberksahin20/" target="_blank" class="social"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const signUpButton = document.getElementById('signUp');
+        const signInButton = document.getElementById('signIn');
+        const container = document.getElementById('container');
+
+        signUpButton.addEventListener('click', () =>
+            container.classList.add('right-panel-active'));
+
+        signInButton.addEventListener('click', () =>
+            container.classList.remove('right-panel-active'));
+    </script>
+</body>
+</html>
