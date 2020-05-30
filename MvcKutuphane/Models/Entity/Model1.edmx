@@ -51,6 +51,7 @@
           <Property Name="Id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ad" Type="varchar" MaxLength="20" />
           <Property Name="Durum" Type="bit" />
+          <Property Name="Slug" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="Kitap">
           <Key>
@@ -393,6 +394,7 @@
           <Property Name="Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Kitap" Relationship="Self.FK_Kitap_Kategori" FromRole="Kategori" ToRole="Kitap" />
           <Property Name="Durum" Type="Boolean" />
+          <Property Name="Slug" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Kitap">
           <Key>
@@ -759,6 +761,7 @@
           <EntitySetMapping Name="Kategori">
             <EntityTypeMapping TypeName="DbKutuphaneModel.Kategori">
               <MappingFragment StoreEntitySet="Kategori">
+                <ScalarProperty Name="Slug" ColumnName="Slug" />
                 <ScalarProperty Name="Durum" ColumnName="Durum" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ad" ColumnName="Ad" />

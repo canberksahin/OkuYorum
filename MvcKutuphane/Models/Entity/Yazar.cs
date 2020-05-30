@@ -20,7 +20,6 @@ namespace MvcKutuphane.Models.Entity
         {
             this.Kitap = new HashSet<Kitap>();
         }
-
         [NotMapped]
         public string FullName
         {

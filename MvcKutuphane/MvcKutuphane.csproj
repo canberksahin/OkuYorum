@@ -2453,6 +2453,7 @@
     <Content Include="Views\Kitap\Show.cshtml" />
     <Content Include="Views\Kitap\_CategoriesPartial.cshtml" />
     <Content Include="Upload\Profiles\.gitignore" />
+    <Content Include="Views\Kategori\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

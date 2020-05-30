@@ -9,13 +9,9 @@
 
 namespace MvcKutuphane.Models.Entity
 {
-    using MvcKutuphane.Common;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Web;
-
+    
     public partial class Uyeler
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,10 +21,7 @@ namespace MvcKutuphane.Models.Entity
             this.Hareket = new HashSet<Hareket>();
             this.Yorums = new HashSet<Yorums>();
         }
-
-        [NotMapped, Display(Name = "Uye Foto"), UrunResmi]
-        public HttpPostedFileBase Foto { get; set; }
-
+    
         public int Id { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }

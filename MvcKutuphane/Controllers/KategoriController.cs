@@ -10,12 +10,12 @@ namespace MvcKutuphane.Controllers
 {
     public class KategoriController : BaseController
     {
-        
+
         public ActionResult Index()
         {
             var degerler = db.Kategori.ToList();
             return View(degerler);
-            
+
         }
 
         public ActionResult Yeni()
@@ -23,7 +23,7 @@ namespace MvcKutuphane.Controllers
             return View();
         }
 
-        [HttpPost,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Yeni(Kategori kat)
         {
             if (ModelState.IsValid)
@@ -36,11 +36,11 @@ namespace MvcKutuphane.Controllers
             return View();
         }
 
-        [HttpPost ,ValidateAntiForgeryToken]
+        [HttpPost, ValidateAntiForgeryToken]
         public ActionResult Sil(int id)
         {
-            var kat=db.Kategori.Find(id);
-            if (kat==null)
+            var kat = db.Kategori.Find(id);
+            if (kat == null)
             {
                 return HttpNotFound();
             }
@@ -58,7 +58,7 @@ namespace MvcKutuphane.Controllers
         public ActionResult Duzenle(int id)
         {
             var kat = db.Kategori.Find(id);
-            if (kat==null)
+            if (kat == null)
             {
                 return HttpNotFound();
             }
@@ -86,6 +86,34 @@ namespace MvcKutuphane.Controllers
             comment.Durum = isPublished ? true : false;
             db.SaveChanges();
             return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
+        }
+
+        // GET: Kategoriler/333/sample-kategori-1
+        [Route("Kategoriler/{katid}/{slugg?}/{ara?}")]
+        public ActionResult Show(int katid, string slugg, string ara = "")
+        {
+            var kat = db.Kategori.Find(katid);
+            if (kat == null)
+            {
+                return HttpNotFound();
+            }
+            if (kat.Slug != slugg)
+            {
+                return RedirectToAction("Show", new { katid = katid, slugg = kat.Slug });
+            }
+            if (ara != "")
+            {
+                var kitaplar = from k in db.Kitap select k;
+                kitaplar = kitaplar.Where(x => x.Kategori == katid);
+                kitaplar = kitaplar.Where(x => x.Ad.Contains(ara));
+                return View(kitaplar.ToList());
+            }
+            else
+            {
+                ICollection<Kitap> kitaplar = kat.Kitap;
+                return View(kitaplar);
+            }
+
         }
     }
 }

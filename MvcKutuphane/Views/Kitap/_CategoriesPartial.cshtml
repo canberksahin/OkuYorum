@@ -6,7 +6,7 @@
     @foreach (var item in Model)
     {
         <li>
-            <a href="@Url.Action("Index","Home"@*,new { cid = item.Id,slug = item.Slug}*@)">@item.Ad</a>
+            <a href="@Url.Action("Show","Kategori",new { katid = item.Id, slugg = item.Slug})">@item.Ad</a>
         </li>
 
     }

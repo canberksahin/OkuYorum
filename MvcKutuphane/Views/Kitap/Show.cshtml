@@ -6,10 +6,10 @@
 }
     <div>
         <!-- Title -->
-        <h1 class="mt-1">@Model.Kitap.Ad</h1>
+        <h1 class="mt-1 text-center">@Model.Kitap.Ad</h1>
 
         <!-- Author -->
-        <p class="lead">
+        <p class="lead text-center">
             @Model.Kitap.Yazar1.FullName
         </p>
 
@@ -20,7 +20,7 @@
             {
                 <div class="w-50 text-left ">
 
-                    <img src="@Url.UrunResim(Model.Kitap.KitapKapak)" alt="Kitap Featured Image" class="img-fluid rounded w-75 ml-3 " />
+                    <img src="@Url.UrunResim(Model.Kitap.KitapKapak)" alt="Kitap Featured Image" class="img-fluid rounded w-75 ml-5 " />
                 </div>
             }
 

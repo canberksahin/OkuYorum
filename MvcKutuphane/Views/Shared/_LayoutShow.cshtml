@@ -15,7 +15,7 @@
     @Styles.Render("~/Content/croppie")
     @Styles.Render("~/Content/fontawesome")
     @Styles.Render("~/Content/css")
-
+    <link href="~/web/css/freelancer.min.css" rel="stylesheet">
 </head>
 
 <body class="d-lex flex-column h-100 mt-5">
@@ -23,22 +23,19 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            @Html.ActionLink("OkuYorum", "Index","Vitrin")
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ">
                     <li class="nav-item">
                         @*@Html.RouteLink("Home", "HomeDefault", null, new { @class = "nav-link" })*@
 
                     </li>
                     <li class="nav-item">
-                        @Html.ActionLink("About", "About", "Home", new { area = "", @class = "nav-link" })
-                    </li>
-                    <li class="nav-item">
-                        @Html.ActionLink("Contact", "Contact", "Home", new { area = "", @class = "nav-link" })
-
+                        <a href="@Url.Action("Index", "Vitrin")" class="nav-link">
+                            &#8592; Anasayfa
+                        </a>
                     </li>
                 </ul>
 
@@ -81,24 +78,24 @@
             <div class="col-md-4">
 
                 <!-- Search Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                        @using (Html.BeginForm("Index", "Home", new { cid = "" }, FormMethod.Get, new { id = "frmSearch" }))
-                        {
-                            <div class="input-group">
-                                @Html.TextBox("q", null, new { @class = "form-control", placeholder = "Search for.." })
-                                <span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="submit">Go!</button>
-                                </span>
-                            </div>
-                        }
-                    </div>
-                </div>
+                @*<div class="card my-4">
+                        <h5 class="card-header">Search</h5>
+                        <div class="card-body">
+                            @using (Html.BeginForm("Index", "Home", new { cid = "" }, FormMethod.Get, new { id = "frmSearch" }))
+                            {
+                                <div class="input-group">
+                                    @Html.TextBox("q", null, new { @class = "form-control", placeholder = "Search for.." })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-secondary" type="submit">Go!</button>
+                                    </span>
+                                </div>
+                            }
+                        </div>
+                    </div>*@
 
                 <!-- Categories Widget -->
                 <div class="card my-4">
-                    <h5 class="card-header">Categories</h5>
+                    <h5 class="card-header">Kategoriler</h5>
                     <div class="card-body">
                         <div class="row">
                             <div class="col">
@@ -109,12 +106,12 @@
                 </div>
 
                 <!-- Side Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Side Widget</h5>
-                    <div class="card-body">
-                        You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                    </div>
-                </div>
+                @*<div class="card my-4">
+                        <h5 class="card-header">Side Widget</h5>
+                        <div class="card-body">
+                            You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+                        </div>
+                    </div>*@
 
             </div>
 
@@ -126,7 +123,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark mt-auto">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; SpringBlog 2020</p>
+            <p class="m-0 text-center text-white">Copyright &copy; <a style="text-decoration:none;color:aliceblue;" href="https://canberksahin.com" target="_blank">Canberk Şahin</a> 2020</p>
         </div>
         <!-- /.container -->
     </footer>

@@ -1,0 +1,74 @@
+﻿@model ICollection<Kitap>
+@{
+    ViewBag.Title = "Show";
+    Layout = "~/Views/Shared/_LayoutShow.cshtml";
+}
+@using (Html.BeginForm("Show", "Kategori", FormMethod.Get))
+{
+    <div style="margin:15px 0" class="form-group row">
+        @Html.TextBox("ara", null, new { @class = "form-control col-9", placeholder = "Kitap Ara" })
+        <input class="btn btn-primary col-1" type="submit" value="Ara" />
+    </div>
+}
+<div class="row">
+
+    <!-- Portfolio Item 1 -->
+    @foreach (var item in Model)
+    {
+        <div class="col-md-6 col-lg-3">
+            <div class="portfolio-item mx-auto text-center" data-toggle="modal" data-target="#@item.Yazar1.Ad@item.Id">
+                <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                    <div class="portfolio-item-caption-content text-center text-white">
+                        <i class="fas fa-plus fa-3x"></i>
+                    </div>
+                </div>
+                <img class="img-fluid" style="height:250px;width:auto;" src="@Url.UrunResim(item.KitapKapak)" alt="">
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Portfolio Modal 1 -->
+@foreach (var item in Model)
+{
+    <div class="portfolio-modal modal fade" id="@item.Yazar1.Ad@item.Id" tabindex="-1" role="dialog" aria-labelledby="portfolioModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </button>
+                <div class="modal-body text-center">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title -->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">@item.Ad</h2>
+                                <!-- Icon Divider -->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image -->
+                                <img class="img-fluid rounded mr-2 float-left" style="height:300px;width:auto;" src="@Url.UrunResim(item.KitapKapak)" alt="">
+                                <!-- Portfolio Modal - Text -->
+                                <p class="mb-5">@item.Ozet</p>
+                                <a class="btn btn-primary" href="https://dosya.co/z190wfvl5013/Kemal_Tahir_-_Esir_Sehrin_İnsanları.pdf.html" target="_blank">
+                                    <i class="far fa-file-pdf fa-fw"></i>
+                                    PDF'ini indir
+                                </a>
+                                <a href="@Url.Action("Show", "Kitap", new { id = item.Id, slug = item.Slug })" class="btn btn-primary">
+                                    Kitap Yorumlarına Bak &rarr;
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
