@@ -1,0 +1,101 @@
+﻿@model List<Yorums>
+@{
+    ViewBag.Title = "Yorum";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<table class="table table-hover table table-striped mt-3">
+    <thead style="font-weight:bold">
+        <tr>
+            <td>İçerik</td>
+            <td>Yazar</td>
+            <td>Kitap</td>
+            <td>Yayınlanma Tarihi</td>
+            <td>Yayında mı?</td>
+            <td>İşlemler</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Icerik</td>
+                <td>@item.YazarId</td>
+                <td>@item.Kitap.Ad</td>
+                <td>@item.YayinlanmaZamani</td>
+                <td>
+                    @Html.CheckBox("IsPublished", item.Durum == true, new { @class = "btn", data_bootstrap_switch = "", data_off_color = "danger", data_on_color = "success", data_off_text = "Hayır", data_on_text = "Evet", data_comment_id = item.Id })
+                </td>
+                <td>
+                    <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#silModal"
+                       data-kat-id="@item.Id" data-kat-ad="@item.Icerik">
+                        <i class="fa fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@using (Html.BeginForm("YorumSil", "Uye", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <!-- Modal -->
+    <div class="modal fade" id="silModal" tabindex="1" role="dialog" aria-labelledby="silModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="silModalTitle">Silme Onayı</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    &quot;<span id="silKatAd">xxx</span>&quot; içerikli yorumun silinmesini onaylıyor musunuz?
+
+                    <input type="hidden" id="silKatId" name="id" value="" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Evet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script>
+        $('#silModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget); // modalın açılmasını tetikleyen buton
+            var Ad = button.data('kat-ad'); // tetikleyici buton üzerindeki data-urun-ad attribute'u
+            var Id = button.data('kat-id'); // tetikleyici buton üzerindeki data-urun-id attribute'u
+            var modal = $(this); // açılan modal'ın kendisi
+            modal.find('#silKatAd').text(Ad); // modal üzerindeki kat ad span'ı
+            modal.find('#silKatId').val(Id); // modal üzerindeki kat id hidden alanı
+        });
+
+        $("input[data-bootstrap-switch]").each(function () {
+
+            var state = $(this).prop('checked');
+            var checkBox = this;
+
+            $(this).bootstrapSwitch({
+                state: state,
+                onSwitchChange: function (event,state) {
+                    var isPublished = state;
+                    var commentId = $(this).data("comment-id");
+
+                    $.post("@Url.Action("DurumDegistir")", { id: commentId, isPublished: isPublished }, function (data) {
+
+                    }).fail(function (xhr, status, error) {
+                        checkBox.bootstrapSwitch("state", !state, true);
+
+                    });
+
+                }
+            });
+        });
+
+    </script>
+}

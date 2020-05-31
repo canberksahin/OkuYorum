@@ -34,7 +34,7 @@
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="@Url.Action("Index","Vitrin",new { area=""})" class="nav-link">Vitrin'e Git</a>
+                    <a href="@Url.Action("Index","Home",new { area=""})" class="nav-link">Vitrin'e Git</a>
                 </li>
             </ul>
 
@@ -180,6 +180,9 @@
                         </li>
                         <li class="nav-item">
                             @MenuLink("Kitaplar", "Index", "Kitap", "fa fa-book")
+                        </li>
+                        <li class="nav-item">
+                            @MenuLink("Yorumlar", "Yorum", "Uye", "fas fa-comments")
                         </li>
                         <li class="nav-item">
                             @MenuLink("Yazarlar", "Index", "Yazar", "fas fa-feather-alt")

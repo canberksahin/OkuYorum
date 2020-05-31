@@ -71,5 +71,34 @@ namespace MvcKutuphane.Controllers
             }
             return View();
         }
+
+        public ActionResult Yorum()
+        {
+            return View(db.Yorums.ToList());
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public ActionResult YorumSil(int id)
+        {
+            var kat = db.Yorums.Find(id);
+            if (kat == null)
+            {
+                return HttpNotFound();
+            }
+            db.Yorums.Remove(kat);
+            db.SaveChanges();
+            TempData["SuccessMessage"] = "Yorum başarıyla silinmiştir.";
+            return RedirectToAction("Yorum","Uye");
+        }
+
+        [HttpPost]
+        public ActionResult DurumDegistir(int id, bool isPublished)
+        {
+            var comment = db.Yorums.Find(id);
+
+            comment.Durum = isPublished ? true : false;
+            db.SaveChanges();
+            return new HttpStatusCodeResult(System.Net.HttpStatusCode.OK);
+        }
     }
 }
