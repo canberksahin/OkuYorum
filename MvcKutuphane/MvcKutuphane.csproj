@@ -232,11 +232,14 @@
     <Content Include="Content\brands.css" />
     <Content Include="Content\brands.min.css" />
     <Content Include="Content\dataTables.bootstrap4.min.css" />
+    <Content Include="Content\docs.theme.min.css" />
     <Content Include="Content\fontawesome-all.css" />
     <Content Include="Content\fontawesome-all.min.css" />
     <Content Include="Content\fontawesome.css" />
     <Content Include="Content\fontawesome.min.css" />
     <Content Include="Content\girisstyle.css" />
+    <Content Include="Content\owl.carousel.min.css" />
+    <Content Include="Content\owl.theme.default.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
@@ -286,6 +289,7 @@
     <Content Include="panel\vendor\jquery\jquery.slim.min.js" />
     <Content Include="Content\toastr.js.map" />
     <Content Include="Scripts\admin.custom.js" />
+    <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bs-custom-file-input.min.js" />
     <Content Include="Scripts\croppie.min.js" />
     <Content Include="Scripts\custom.js" />
@@ -360,10 +364,13 @@
     <Content Include="Scripts\dist\js\pages\dashboard2.js" />
     <Content Include="Scripts\dist\js\pages\dashboard3.js" />
     <Content Include="Scripts\dist\js\Slug.js" />
+    <Content Include="Scripts\highlight.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\owl.carousel.js" />
+    <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.min.css" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
@@ -1991,6 +1998,8 @@
     <Content Include="Scripts\plugins\toastr\toastr.min.js" />
     <Content Include="Scripts\Slug.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Upload\buyuk.jpg" />
+    <Content Include="Upload\kucuk.jpg" />
     <Content Include="web2\css\bootstrap.css" />
     <Content Include="web2\css\clndr.css" />
     <Content Include="web2\css\jqvmap.css" />
