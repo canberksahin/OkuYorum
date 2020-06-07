@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace MvcKutuphane.Controllers
 {
-    [AdminAttribute]
     public class PersonelController : BaseController
     {
         // GET: Personel

@@ -9,7 +9,6 @@ using System.Web.Mvc;
 
 namespace MvcKutuphane.Controllers
 {
-    [AdminAttribute]
     public class YazarController : BaseController
     {
         // GET: Yazar

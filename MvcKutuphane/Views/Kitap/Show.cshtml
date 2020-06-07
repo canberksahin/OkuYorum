@@ -4,104 +4,107 @@
     ViewBag.Title = Model.Kitap.Ad;
     Layout = "~/Views/Shared/_LayoutShow.cshtml";
 }
-    <div>
-        <!-- Title -->
-        <h1 class="mt-1 text-center">@Model.Kitap.Ad</h1>
+<div>
+    <!-- Title -->
+    <h1 class="mt-1 text-center">@Model.Kitap.Ad</h1>
 
-        <!-- Author -->
-        <p class="lead text-center">
-            @Model.Kitap.Yazar1.FullName
-        </p>
+    <!-- Author -->
+    <p class="lead text-center">
+        @Model.Kitap.Yazar1.FullName
+    </p>
 
-        <hr />
-        <div class="row">
-            <!-- Preview Image -->
-            @if (!string.IsNullOrEmpty(Model.Kitap.KitapKapak))
-            {
-                <div class="w-50 text-left ">
+    <hr />
+    <div class="row">
+        <!-- Preview Image -->
+        @if (!string.IsNullOrEmpty(Model.Kitap.KitapKapak))
+        {
+            <div class="w-50 text-left ">
 
-                    <img src="@Url.UrunResim(Model.Kitap.KitapKapak)" alt="Kitap Featured Image" class="img-fluid rounded w-75 ml-5 " />
-                </div>
-            }
-
-
-            <!-- Post Content -->
-            <div class="w-50">@Html.Raw(Model.Kitap.Ozet)</div>
-        </div>
-        <hr />
-
-
-        <!-- Date/Time -->
-        <div class="row">
-            <div class="w-50"><p class="ml-3">Basım Yılı: @Model.Kitap.BasımYıl</p></div>
-            <div class="w-50"><p>Sayfa Sayısı: @Model.Kitap.Sayfa</p></div>
-        </div>
-
-        <hr />
-        <!-- Comments Form -->
-        <div class="card my-4" id="leave-a-comment">
-            <h5 class="card-header">Bir yorum bırakın:</h5>
-            <div class="card-body">
-                @if (Request.QueryString["commentSuccess"] == "True")
-                {
-                    <div class="alert alert-success">
-                        Yorumunuz başarıyla eklenmiştir.
-                    </div>
-                }
-                @if (Session["Mail"] !=null)
-                {
-                    @Html.Partial("_CommentFormPartial", Model.YorumViewModel)
-                }
-                else
-                {
-                    <p class="text-center mt-3">Yorum yapabilmeniz için lütfen, @Html.ActionLink("Giriş Yapınız", "Index", "Giris", new { returnUrl = Request.Url.AbsolutePath }, null) ya da @Html.ActionLink("Kayıt Olunuz", "Index", "Giris") </p>
-                }
+                <img src="@Url.UrunResim(Model.Kitap.KitapKapak)" alt="Kitap Featured Image" class="img-fluid rounded w-75 ml-5 " />
             </div>
-        </div>
+        }
 
-        <!-- Comments -->
-        <div id="comments">
-            @foreach (var item in Model.Kitap.Yorums.
-           Where(x => x.Durum == true && x.ParentId == null).
-           OrderByDescending(x => x.YayinlanmaZamani))
+
+        <!-- Post Content -->
+        <div class="w-50">@Html.Raw(Model.Kitap.Ozet)</div>
+    </div>
+    <hr />
+
+
+    <!-- Date/Time -->
+    <div class="row">
+        <div class="w-50"><p class="ml-3">Basım Yılı: @Model.Kitap.BasımYıl</p></div>
+        <div class="w-50"><p>Sayfa Sayısı: @Model.Kitap.Sayfa</p></div>
+    </div>
+
+    <hr />
+    <!-- Comments Form -->
+    <div class="card my-4" id="leave-a-comment">
+        <h5 class="card-header">Bir yorum bırakın:</h5>
+        <div class="card-body">
+            @if (Request.QueryString["commentSuccess"] == "True")
             {
-                <div class="media mt-4" >
-                    <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(item.Uyeler.Fotograf)" alt="" width="50" height="50">
-                    <div class="media-body">
-                        <h5 class="mt-0">@item.Uyeler.KullaniciAdi</h5>
-                        <p style="background-color:aliceblue; border-radius:25px;">@item.Icerik</p>
-
-                        @if (Session["Mail"] != null)
-                        {
-                            <a href="" class="replay-button small" data-comment-id="@item.Id">Cevapla</a>
-                            <a href="@Url.Action("Cevapla","Mesajlar",new { id=item.YazarId })" class="small" data-comment-id="@item.Id">Mesaj Gönder</a>
-                        }
-                        else
-                        {
-                            <a href="" class="replay-button yukari small" data-comment-id="@item.Id">Cevapla</a>
-                            <a href="" class="replay-button yukari small" data-comment-id="@item.Id">Mesaj Gönder</a>
-                        }
-                        <div class="reply-form-wrapper"></div>
-
-                        @foreach (var subcomment in item.Yorums1.
-                            Where(x => x.Durum == true).
-                            OrderBy(x => x.YayinlanmaZamani))
-                        {
-                            <div class="media mt-4" >
-                                <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(subcomment.Uyeler.Fotograf)" alt="" width="50" height="50">
-                                <div class="media-body">
-                                    <h5 class="mt-0">@subcomment.Uyeler.KullaniciAdi</h5>
-                                    <p style="background-color:aliceblue; border-radius:25px;">@subcomment.Icerik</p> 
-                                </div>
-                            </div>
-                        }
-                    </div>
+                <div class="alert alert-success">
+                    Yorumunuz başarıyla eklenmiştir.
                 </div>
             }
+            @if (Session["Mail"] != null)
+            {
+                @Html.Partial("_CommentFormPartial", Model.YorumViewModel)
+            }
+            else
+            {
+                <p class="text-center mt-3">Yorum yapabilmeniz için lütfen, @Html.ActionLink("Giriş Yapınız", "Index", "Giris", new { returnUrl = Request.Url.AbsolutePath }, null) ya da @Html.ActionLink("Kayıt Olunuz", "Index", "Giris") </p>
+            }
         </div>
-
-
     </div>
+
+    <!-- Comments -->
+    <div id="comments">
+        @foreach (var item in Model.Kitap.Yorums.
+       Where(x => x.Durum == true && x.ParentId == null).
+       OrderByDescending(x => x.YayinlanmaZamani))
+        {
+            <div class="media mt-4">
+                <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(item.Uyeler.Fotograf)" alt="" width="50" height="50">
+                <div class="media-body">
+                    <h5 class="mt-0 mb-0">@item.Uyeler.KullaniciAdi</h5>
+                    @if (Session["Mail"] != null)
+                    {
+                        <a href="@Url.Action("Cevapla","Mesajlar",new { id=item.YazarId })" class="small">Mesaj Gönder</a>
+                    }
+                    <p style="background-color:aliceblue; border-radius:25px;" class="mt-2">@item.Icerik</p>
+
+                    @if (Session["Mail"] != null)
+                    {
+                        <a href="" class="replay-button small" data-comment-id="@item.Id">Cevapla</a>
+                    }
+                    else
+                    {
+                        <a href="" class="replay-button yukari small" data-comment-id="@item.Id">Cevapla</a>
+                        <a href="" class="replay-button yukari small" data-comment-id="@item.Id">Mesaj Gönder</a>
+                    }
+                    <div class="reply-form-wrapper"></div>
+
+                    @foreach (var subcomment in item.Yorums1.
+                        Where(x => x.Durum == true).
+                        OrderBy(x => x.YayinlanmaZamani))
+                    {
+                        <div class="media mt-4">
+                            <img class="d-flex mr-3 rounded-circle" src="@Url.ProfilePhoto(subcomment.Uyeler.Fotograf)" alt="" width="50" height="50">
+                            <div class="media-body">
+                                <h5 class="mt-0">@subcomment.Uyeler.KullaniciAdi</h5>
+                                <p style="background-color:aliceblue; border-radius:25px;">@subcomment.Icerik</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+
+
+</div>
 
 @section scripts {
     <script>

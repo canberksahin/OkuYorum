@@ -11,7 +11,6 @@ using System.Web.Mvc;
 
 namespace MvcKutuphane.Controllers
 {
-    [AdminAttribute]
     public class UyeController : BaseController
     {
         // GET: Uyeler
