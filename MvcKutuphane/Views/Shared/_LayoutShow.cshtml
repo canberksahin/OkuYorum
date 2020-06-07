@@ -135,6 +135,20 @@
     @Scripts.Render("~/bundles/croppie")
     @Scripts.Render("~/bundles/site")
     @RenderSection("scripts", false)
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+             <text>
+                toastr.success('@(TempData["SuccessMessage"])');
+             </text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+             <text>
+                 toastr.error('@(TempData["ErrorMessage"])');
+             </text>
+        }
+    </script>
 </body>
 
 </html>

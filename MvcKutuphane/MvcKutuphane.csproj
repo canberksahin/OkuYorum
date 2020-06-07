@@ -137,6 +137,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Attribute\SayiYokAttribute.cs" />
+    <Compile Include="Authorization\AdminAttribute.cs" />
     <Compile Include="Common\UrlService.cs" />
     <Compile Include="Common\UrunIslemleri.cs" />
     <Compile Include="Common\UrunResmiAttribute.cs" />
@@ -244,6 +245,7 @@
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
     <Content Include="Content\responsive.bootstrap4.min.css" />
+    <Content Include="Content\simple-sidebar.css" />
     <Content Include="Content\solid.css" />
     <Content Include="Content\solid.min.css" />
     <Content Include="Content\summernote-bs4.min.css" />
@@ -2441,6 +2443,7 @@
     <Content Include="Views\Kategori\Show.cshtml" />
     <Content Include="Views\Giris\Index.cshtml" />
     <Content Include="Views\Uye\Yorum.cshtml" />
+    <Content Include="Views\Mesajlar\Cevapla.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

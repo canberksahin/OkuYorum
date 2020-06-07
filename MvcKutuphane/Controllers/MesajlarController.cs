@@ -27,6 +27,18 @@ namespace MvcKutuphane.Controllers
             return View();
         }
 
+        public ActionResult Cevapla(int id)
+        {
+            var yazar = db.Uyeler.FirstOrDefault(x=>x.Id==id);
+            var mail = yazar.Mail;
+            var mesaj = new Mesajlar
+            {
+                Alici = mail
+            };
+            return View(mesaj);
+        }
+
+
         [HttpPost]
         public ActionResult YeniMesaj(Mesajlar m)
         {

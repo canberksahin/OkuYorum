@@ -1,12 +1,12 @@
 ﻿@model Mesajlar
 @{
-    ViewBag.Title = "YeniMesaj";
+    ViewBag.Title = "Cevapla";
     Layout = "~/Views/Shared/_LayoutPanel.cshtml";
 }
 @using (Html.BeginForm("YeniMesaj", "Mesajlar", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <div class="form-group">
+    <div class="form-group ">
         @Html.LabelFor(x => x.Alici)
         @Html.TextBoxFor(x => x.Alici, new { @class = "form-control" })
     </div>

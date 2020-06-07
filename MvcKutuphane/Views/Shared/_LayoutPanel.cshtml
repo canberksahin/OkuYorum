@@ -16,7 +16,7 @@
     @Styles.Render("~/Content/fontawesome")
     @Styles.Render("~/Content/css")
     <!-- Custom styles for this template -->
-    <link href="~/panel/css/simple-sidebar.css" rel="stylesheet">
+    <link href="~/Content/simple-sidebar.css" rel="stylesheet">
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
 </head>
 
@@ -38,7 +38,6 @@
                 <a href="#" class="list-group-item list-group-item-action bg-light">Duyurular</a>
                 <a href="@Url.Action("Kitaplarım","Panelim")" class="list-group-item list-group-item-action bg-light">Yorumlarım</a>
                 <a href="@Url.Action("Index","Home")" class="list-group-item list-group-item-action bg-light">Vitrin</a>
-                <a href="#" class="list-group-item list-group-item-action bg-light">Yardım</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -98,6 +97,20 @@
         });
     </script>
     @RenderSection("scripts", false)
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+             <text>
+                toastr.success('@(TempData["SuccessMessage"])');
+             </text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+             <text>
+                 toastr.error('@(TempData["ErrorMessage"])');
+             </text>
+        }
+    </script>
 </body>
 
 </html>

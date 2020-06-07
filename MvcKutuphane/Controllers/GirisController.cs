@@ -19,13 +19,18 @@ namespace MvcKutuphane.Controllers
         [HttpPost]
         public ActionResult Kayit(Uyeler uye)
         {
-            if (ModelState.IsValid)
+            if (db.Uyeler.FirstOrDefault(x => x.Mail == uye.Mail) == null)
             {
-                db.Uyeler.Add(uye);
-                db.SaveChanges();
-                return RedirectToAction("Index", "Home");
+                if (ModelState.IsValid)
+                {
+                    db.Uyeler.Add(uye);
+                    db.SaveChanges();
+                    TempData["SuccessMessage"] = "Kaydınız başarıyla oluşturulmuştur.";
+                    return RedirectToAction("Index");
+                }
             }
-            return View();
+            TempData["ErrorMessage"] = "Bu e-mail adresi veya kullanıcı adıyla mevcut bir kayıt bulunmaktadır.";
+                    return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -47,7 +52,7 @@ namespace MvcKutuphane.Controllers
         public ActionResult CikisYap()
         {
             Session.Clear();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

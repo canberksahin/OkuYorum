@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Giriş Yap</title>
     <link href="~/Content/girisstyle.css" rel="stylesheet" />
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
 </head>
 <body>
     <div>
@@ -21,20 +22,20 @@
             <div class="form-container sign-up-container">
                 <form action="@Url.Action("Kayit","Giris")" method="post">
                     <h1>Hesap Oluşturun</h1>
-                    <input type="text" placeholder="Ad" name="Ad" />
-                    <input type="text" placeholder="Soyad" name="Soyad" />
-                    <input type="email" placeholder="Email" name="Mail"/>
-                    <input type="text" placeholder="Kullanıcı Adı" name="KullaniciAdi"/>
-                    <input type="tel" placeholder="Telefon" name="Telefon"/>
-                    <input type="password" placeholder="Sifre" name="Sifre" />
-                    <button>Kaydol</button>
+                    <input type="text" placeholder="Ad" name="Ad" required />
+                    <input type="text" placeholder="Soyad" name="Soyad" required />
+                    <input type="email" placeholder="Email" name="Mail" required />
+                    <input type="text" placeholder="Kullanıcı Adı" name="KullaniciAdi" required />
+                    <input type="tel" placeholder="Telefon" name="Telefon" />
+                    <input type="password" placeholder="Sifre" name="Sifre" required />
+                    <button id="btnKaydol">Kaydol</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form action="@Url.Action("GirisYap","Giris")" method="post">
                     <h1>Giriş Yap</h1>
-                    <input type="email" placeholder="Email" name="Mail" required/>
-                    <input type="password" placeholder="Password" name="Sifre" required/>
+                    <input type="email" placeholder="Email" name="Mail" required />
+                    <input type="password" placeholder="Password" name="Sifre" required />
                     @*<a href="#">Forgot your password?</a>*@
                     <button>Giriş Yap</button>
                 </form>
@@ -59,11 +60,34 @@
             <b>Bizi takip edebilirsiniz </b>
             <div class="mx-auto">
                 <a href="https://github.com/canberksahin" target="_blank" class="social"><i class="fab fa-github"></i></a>
-                <a href="https://www.instagram.com/vaibhavkhulbe143/" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.instagram.com/canberkshn/" target="_blank" class="social"><i class="fab fa-instagram"></i></a>
                 <a href="https://linkedin.com/in/canberksahin20/" target="_blank" class="social"><i class="fab fa-linkedin"></i></a>
             </div>
         </div>
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bs-custom-file-input")
+    @Scripts.Render("~/bundles/croppie")
+    @Scripts.Render("~/bundles/site")
+    <script src="~/Scripts/popper.js"></script>
+    <script src="~/Scripts/bootstrap-switch.min.js"></script>
+    <script src="~/Scripts/admin.custom.js"></script>
+    <script src="~/Content/toastr.min.js"></script>
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+             <text>
+                toastr.success('@(TempData["SuccessMessage"])');
+             </text>
+        }
+        @if (TempData["ErrorMessage"] != null)
+        {
+             <text>
+                 toastr.error('@(TempData["ErrorMessage"])');
+             </text>
+        }
+    </script>
     <script>
         const signUpButton = document.getElementById('signUp');
         const signInButton = document.getElementById('signIn');
@@ -74,6 +98,8 @@
 
         signInButton.addEventListener('click', () =>
             container.classList.remove('right-panel-active'));
+
     </script>
+
 </body>
 </html>

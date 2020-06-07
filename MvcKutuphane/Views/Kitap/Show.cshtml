@@ -73,11 +73,13 @@
 
                         @if (Session["Mail"] != null)
                         {
-                            <a href="" class="replay-button small" data-comment-id="@item.Id">Reply</a>
+                            <a href="" class="replay-button small" data-comment-id="@item.Id">Cevapla</a>
+                            <a href="@Url.Action("Cevapla","Mesajlar",new { id=item.YazarId })" class="small" data-comment-id="@item.Id">Mesaj Gönder</a>
                         }
                         else
                         {
-                            <a href="" class="replay-button yukari small" data-comment-id="@item.Id">Reply</a>
+                            <a href="" class="replay-button yukari small" data-comment-id="@item.Id">Cevapla</a>
+                            <a href="" class="replay-button yukari small" data-comment-id="@item.Id">Mesaj Gönder</a>
                         }
                         <div class="reply-form-wrapper"></div>
 
