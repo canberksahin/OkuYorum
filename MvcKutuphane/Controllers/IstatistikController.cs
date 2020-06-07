@@ -1,4 +1,5 @@
-﻿using MvcKutuphane.Models.Entity;
+﻿using MvcKutuphane.Authorization;
+using MvcKutuphane.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Web.Mvc;
 
 namespace MvcKutuphane.Controllers
 {
+    [AdminAttribute]
     public class IstatistikController : BaseController
     {
         // GET: Istatistik

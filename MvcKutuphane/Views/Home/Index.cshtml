@@ -20,7 +20,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Theme CSS -->
-    <link href="~/web/css/freelancer.min.css" rel="stylesheet">>
+    <link href="~/web/css/freelancer.min.css" rel="stylesheet">
+    <link href="~/Content/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Content/responsive.bootstrap4.min.css" rel="stylesheet" />
     <style>
         body {
             font-size: 12px;
@@ -29,7 +31,7 @@
     </style>
 </head>
 
-<body id="page-top" class="mx-auto">
+<body id="page-top" class="mx-auto" style="background-color: #1abc9c;">
 
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" style="height:60px;" id="mainNav">
@@ -43,9 +45,6 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Kitaplar</a>
-                    </li>
-                    <li class="nav-item mx-0 mx-lg-1">
-                        <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#about">İşlenen Konular</a>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1">
                         <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contact">İletişim</a>
@@ -128,12 +127,12 @@
                             }
                         </div>
                     </div>
-                    @for (int i = 1; i < ((Model.Kitaplar.Count()) / 8)+1; i++)
+                    @for (int i = 1; i < ((Model.Kitaplar.Count()) / 8) + 1; i++)
                     {
                         <div class="carousel-item">
                             <div class="row">
-                                
-                                @for (int j = 0; j < (Model.Kitaplar.Count-8*i); j++)
+
+                                @for (int j = 0; j < (Model.Kitaplar.Count - 8 * i); j++)
                                 {
                                     <div class="col-md-6 col-lg-3">
                                         <div class="portfolio-item mx-auto text-center" data-toggle="modal" data-target="#@Model.Kitaplar[8*i +j].Yazar1.Ad@Model.Kitaplar[8*i +j].Id">
@@ -145,7 +144,7 @@
                                             <img class="img-fluid" style="height:250px;width:auto;" src="@Url.UrunResim(@Model.Kitaplar[8*i +j].KitapKapak)" alt="">
                                         </div>
                                     </div>
-                                    if (j==7)
+                                    if (j == 7)
                                     {
                                         break;
                                     }
@@ -155,11 +154,11 @@
                     }
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleControls" style="width:50px;" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon bg-dark" aria-hidden="true"></span>
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
                 </a>
                 <a class="carousel-control-next" style="width:50px;" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon bg-dark" aria-hidden="true"></span>
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Next</span>
                 </a>
             </div>
@@ -167,77 +166,6 @@
     </section>
 
     <!-- About Section -->
-    <section class="page-section bg-primary text-white mb-0 pt-5" id="about">
-        <div class="container">
-
-            <!-- About Section Heading -->
-            <h2 class="page-section-heading text-center text-uppercase text-white">Yapım Aşamasında İşlenen Konular</h2>
-
-            <!-- Icon Divider -->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon">
-                    <i class="fas fa-star"></i>
-                </div>
-                <div class="divider-custom-line"></div>
-            </div>
-
-            <!-- About Section Content -->
-            <div class="row">
-                <div class="col-lg-3 ml-auto">
-                    <p class="lead">
-                        Model
-                        <ul>
-                            <li>EF(OnModelCreating, CascadeDeleteOff, Migrations, GenerateScript)</li>
-                            <li>Data Annotations(Required, Display, MaxLength, Table, NotMapped, RegularExpression, Custom Attributes)</li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="col-lg-3 mr-auto">
-                    <p class="lead">
-                        View
-                        <ul>
-                            <li>Razor Tagleri</li>
-                            <li>Shared</li>
-                            <li>WebConfig</li>
-                            <li>HtmlHelpers(url.Action, using, BeginForm, LabelFor, DropDownListFor, TextBoxFor, TextAreaFor, ValidationMessageFor, AntiForgeryToken, ActionLink, HiddenFor, FormMethod)</li>
-                            <li>Bootstrap Modals</li>
-                            <li>Sections</li>
-                            <li>Layout(Script, cdn, RenderBody, RenderSection)</li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="col-lg-3 mr-auto">
-                    <p class="lead">
-                        Controller
-                        <ul>
-                            <li>Crud(Get,Post, AntiForgeryToken)</li>
-                            <li>Validation (ModelState, ValidationAttribute)</li>
-                            <li>ViewBag,ViewData,TempData</li>
-                            <li>ActionResult(ViewResult, RedirectResult, HttpStatusCodeResult)</li>
-                            <li>ModelBinding</li>
-                            <li>FileUpload (HttpPostedFileBase, Server.MapPath, GetExtension, Enctype)</li>
-                            <li>BaseController (Dispose, db)</li>
-                        </ul>
-                    </p>
-                </div>
-                <div class="col-lg-3 mr-auto">
-                    <p class="lead">
-                        C#
-                        <ul>
-                            <li>Reflection (GetType, GetProperties)</li>
-                            <li>Refactoring</li>
-                            <li>Guid</li>
-                            <li>Extension Methods</li>
-                            <li>String Split</li>
-                            <li>File,IO</li>
-                        </ul>
-                    </p>
-                </div>
-            </div>
-
-        </div>
-    </section>
 
     <!-- Contact Section -->
     <section class="page-section pt-5" id="contact">
@@ -406,7 +334,8 @@
     <!-- Bootstrap core JavaScript -->
     <script src="~/web/vendor/jquery/jquery.min.js"></script>
     <script src="~/web/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <!-- Plugin JavaScript -->
     <script src="~/web/vendor/jquery-easing/jquery.easing.min.js"></script>
 
@@ -421,6 +350,11 @@
     <script src="~/Scripts/Slug.js"></script>
     <script src="~/Scripts/highlight.js"></script>
     <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/dataTables.bootstrap4.min.js"></script>
+    <script src="~/Scripts/dataTables.responsive.min.js"></script>
+    <script src="~/Scripts/responsive.bootstrap4.min.js"></script>
+    <script src="~/Scripts/bs-custom-file-input.min.js"></script>
 </body>
 
 </html>

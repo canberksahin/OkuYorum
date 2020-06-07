@@ -1,4 +1,5 @@
-﻿using MvcKutuphane.Models.Entity;
+﻿using MvcKutuphane.Authorization;
+using MvcKutuphane.Models.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 
 namespace MvcKutuphane.Controllers
 {
+    [AdminAttribute]
     public class PersonelController : BaseController
     {
         // GET: Personel

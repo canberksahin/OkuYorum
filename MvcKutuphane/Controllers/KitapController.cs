@@ -1,4 +1,5 @@
-﻿using MvcKutuphane.Common;
+﻿using MvcKutuphane.Authorization;
+using MvcKutuphane.Common;
 using MvcKutuphane.Models.Entity;
 using MvcKutuphane.ViewModels;
 using System;
@@ -11,6 +12,7 @@ using System.Web.Mvc;
 
 namespace MvcKutuphane.Controllers
 {
+    [AdminAttribute]
     public class KitapController : BaseController
     {
         [HttpPost]

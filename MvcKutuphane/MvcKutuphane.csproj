@@ -245,6 +245,7 @@
     <Content Include="Content\regular.css" />
     <Content Include="Content\regular.min.css" />
     <Content Include="Content\responsive.bootstrap4.min.css" />
+    <Content Include="Content\rsponsive.bootstrap4.min.css" />
     <Content Include="Content\simple-sidebar.css" />
     <Content Include="Content\solid.css" />
     <Content Include="Content\solid.min.css" />
@@ -295,6 +296,8 @@
     <Content Include="Scripts\bs-custom-file-input.min.js" />
     <Content Include="Scripts\croppie.min.js" />
     <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\dataTables.bootstrap4.min.js" />
+    <Content Include="Scripts\dataTables.responsive.min.js" />
     <Content Include="Scripts\dist\css\adminlte.css.map" />
     <Content Include="Scripts\dist\css\adminlte.min.css.map" />
     <Content Include="Scripts\dist\css\alt\adminlte.components.css.map" />
@@ -371,6 +374,7 @@
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
     <Content Include="Scripts\owl.carousel.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
     <Content Include="Scripts\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
@@ -1998,6 +2002,7 @@
     <Content Include="Scripts\plugins\toastr\toastr.css" />
     <Content Include="Scripts\plugins\toastr\toastr.min.css" />
     <Content Include="Scripts\plugins\toastr\toastr.min.js" />
+    <Content Include="Scripts\responsive.bootstrap4.min.js" />
     <Content Include="Scripts\Slug.js" />
     <Content Include="Scripts\toastr.min.js" />
     <Content Include="Upload\buyuk.jpg" />

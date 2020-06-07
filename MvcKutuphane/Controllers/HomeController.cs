@@ -14,6 +14,7 @@ namespace MvcKutuphane.Controllers
             VitrinIndexViewModel vm = new VitrinIndexViewModel();
             vm.Kitaplar = db.Kitap.ToList();
             vm.Hakkimizda = db.Hakkimizda.ToList();
+            vm.Yorumlar = db.Yorums.ToList();
             return View(vm);
         }
 

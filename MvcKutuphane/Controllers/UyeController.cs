@@ -1,4 +1,5 @@
-﻿using MvcKutuphane.Models.Entity;
+﻿using MvcKutuphane.Authorization;
+using MvcKutuphane.Models.Entity;
 using PagedList;
 using PagedList.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Web.Mvc;
 
 namespace MvcKutuphane.Controllers
 {
+    [AdminAttribute]
     public class UyeController : BaseController
     {
         // GET: Uyeler
